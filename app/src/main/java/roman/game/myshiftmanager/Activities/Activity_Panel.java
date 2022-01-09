@@ -1,16 +1,18 @@
 package roman.game.myshiftmanager.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.imageview.ShapeableImageView;
-import com.google.android.material.textview.MaterialTextView;
 
 import roman.game.myshiftmanager.Fragments.Fragment_Calendar;
 import roman.game.myshiftmanager.Fragments.Fragment_Profile;
@@ -26,8 +28,7 @@ public class Activity_Panel extends AppCompatActivity {
     private Fragment_Calendar panel_fragment_calendar;
     private Fragment_Reports panel_fragment_reports;
     private Fragment_Settings panel_fragment_settings;
-    private MaterialTextView panel_LBL_title;
-    private ShapeableImageView panel_IMG_profile, panel_IMG_calendar, panel_IMG_reports, panel_IMG_settings;
+    private MaterialToolbar panel_TLB_toolbar;
     private MaterialButton panel_BTN_profile, panel_BTN_calendar, panel_BTN_reports, panel_BTN_settings;
 
     @Override
@@ -38,15 +39,20 @@ public class Activity_Panel extends AppCompatActivity {
         findViews();
         setFragments();
 
+        setSupportActionBar(panel_TLB_toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        panel_TLB_toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
         panel_BTN_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 replaceFragments(panel_fragment_profile);
-                panel_LBL_title.setText("Profile");
-                panel_IMG_profile.setImageResource(R.drawable.img_profile_selected);
-                panel_IMG_calendar.setImageResource(R.drawable.img_calendar);
-                panel_IMG_reports.setImageResource(R.drawable.img_report);
-                panel_IMG_settings.setImageResource(R.drawable.img_settings);
+                panel_TLB_toolbar.setTitle(R.string.profile);
+                panel_BTN_profile.setIcon(getDrawable(R.drawable.img_profile_selected));
+                panel_BTN_calendar.setIcon(getDrawable(R.drawable.img_calendar));
+                panel_BTN_reports.setIcon(getDrawable(R.drawable.img_report));
+                panel_BTN_settings.setIcon(getDrawable(R.drawable.img_settings));
             }
         });
 
@@ -54,11 +60,11 @@ public class Activity_Panel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 replaceFragments(panel_fragment_calendar);
-                panel_LBL_title.setText("Calendar");
-                panel_IMG_profile.setImageResource(R.drawable.img_profile);
-                panel_IMG_calendar.setImageResource(R.drawable.img_calendar_selected);
-                panel_IMG_reports.setImageResource(R.drawable.img_report);
-                panel_IMG_settings.setImageResource(R.drawable.img_settings);
+                panel_TLB_toolbar.setTitle(R.string.calendar);
+                panel_BTN_profile.setIcon(getDrawable(R.drawable.img_profile));
+                panel_BTN_calendar.setIcon(getDrawable(R.drawable.img_calendar_selected));
+                panel_BTN_reports.setIcon(getDrawable(R.drawable.img_report));
+                panel_BTN_settings.setIcon(getDrawable(R.drawable.img_settings));
             }
         });
 
@@ -66,11 +72,11 @@ public class Activity_Panel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 replaceFragments(panel_fragment_reports);
-                panel_LBL_title.setText("Reports");
-                panel_IMG_profile.setImageResource(R.drawable.img_profile);
-                panel_IMG_calendar.setImageResource(R.drawable.img_calendar);
-                panel_IMG_reports.setImageResource(R.drawable.img_report_selected);
-                panel_IMG_settings.setImageResource(R.drawable.img_settings);
+                panel_TLB_toolbar.setTitle(R.string.reports);
+                panel_BTN_profile.setIcon(getDrawable(R.drawable.img_profile));
+                panel_BTN_calendar.setIcon(getDrawable(R.drawable.img_calendar));
+                panel_BTN_reports.setIcon(getDrawable(R.drawable.img_report_selected));
+                panel_BTN_settings.setIcon(getDrawable(R.drawable.img_settings));
             }
         });
 
@@ -78,11 +84,11 @@ public class Activity_Panel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 replaceFragments(panel_fragment_settings);
-                panel_LBL_title.setText("Settings");
-                panel_IMG_profile.setImageResource(R.drawable.img_profile);
-                panel_IMG_calendar.setImageResource(R.drawable.img_calendar);
-                panel_IMG_reports.setImageResource(R.drawable.img_report);
-                panel_IMG_settings.setImageResource(R.drawable.img_settings_selected);
+                panel_TLB_toolbar.setTitle(R.string.settings);
+                panel_BTN_profile.setIcon(getDrawable(R.drawable.img_profile));
+                panel_BTN_calendar.setIcon(getDrawable(R.drawable.img_calendar));
+                panel_BTN_reports.setIcon(getDrawable(R.drawable.img_report));
+                panel_BTN_settings.setIcon(getDrawable(R.drawable.img_settings_selected));
             }
         });
     }
@@ -106,14 +112,34 @@ public class Activity_Panel extends AppCompatActivity {
     }
 
     private void findViews() {
-        panel_LBL_title = findViewById(R.id.panel_LBL_title);
+        panel_TLB_toolbar = findViewById(R.id.panel_TLB_toolbar);
         panel_BTN_profile = findViewById(R.id.panel_BTN_profile);
         panel_BTN_calendar = findViewById(R.id.panel_BTN_calendar);
         panel_BTN_reports = findViewById(R.id.panel_BTN_reports);
         panel_BTN_settings = findViewById(R.id.panel_BTN_settings);
-        panel_IMG_profile = findViewById(R.id.panel_IMG_profile);
-        panel_IMG_calendar = findViewById(R.id.panel_IMG_calendar);
-        panel_IMG_reports = findViewById(R.id.panel_IMG_reports);
-        panel_IMG_settings = findViewById(R.id.panel_IMG_settings);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_about) {
+            // TODO: 09/01/2022 add about
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">myShift Manager</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+    <string name="reports">Reports</string>
+    <string name="calendar">Calendar</string>
+    <string name="profile">Profile</string>
+    <string name="title">Title</string>
 </resources>

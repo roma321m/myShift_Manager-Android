@@ -16,8 +16,9 @@ public class Fragment_Reports extends Fragment {
 
     public Fragment_Reports(){};
 
-    public void setActivity(AppCompatActivity activity) {
+    public Fragment_Reports setActivity(AppCompatActivity activity) {
         this.activity = activity;
+        return this;
     }
 
     @Override

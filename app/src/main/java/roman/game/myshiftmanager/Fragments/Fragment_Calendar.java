@@ -16,8 +16,9 @@ public class Fragment_Calendar extends Fragment {
 
     public Fragment_Calendar(){};
 
-    public void setActivity(AppCompatActivity activity) {
+    public Fragment_Calendar setActivity(AppCompatActivity activity) {
         this.activity = activity;
+        return this;
     }
 
     @Override

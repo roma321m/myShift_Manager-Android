@@ -73,11 +73,11 @@ public class Activity_Splash extends AppCompatActivity {
     }
 
     private void animationDone() {
-        openMainMenuActivity();
+        openLoginActivity();
     }
 
-    private void openMainMenuActivity() {
-        Intent intent = new Intent(this, Activity_Panel.class);
+    private void openLoginActivity() {
+        Intent intent = new Intent(this, Activity_Login.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();

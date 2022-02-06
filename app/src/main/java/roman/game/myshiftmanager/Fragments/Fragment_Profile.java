@@ -17,8 +17,9 @@ public class Fragment_Profile extends Fragment {
 
     public Fragment_Profile(){};
 
-    public void setActivity(AppCompatActivity activity) {
+    public Fragment_Profile setActivity(AppCompatActivity activity) {
         this.activity = activity;
+        return this;
     }
 
     @Override

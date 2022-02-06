@@ -16,8 +16,9 @@ public class Fragment_Settings extends Fragment {
 
     public Fragment_Settings(){};
 
-    public void setActivity(AppCompatActivity activity) {
+    public Fragment_Settings setActivity(AppCompatActivity activity) {
         this.activity = activity;
+        return this;
     }
 
     @Override

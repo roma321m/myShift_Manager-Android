@@ -1,15 +1,16 @@
 package roman.game.myshiftmanager.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -18,18 +19,22 @@ import roman.game.myshiftmanager.Fragments.Fragment_Calendar;
 import roman.game.myshiftmanager.Fragments.Fragment_Profile;
 import roman.game.myshiftmanager.Fragments.Fragment_Reports;
 import roman.game.myshiftmanager.Fragments.Fragment_Settings;
+
+import roman.game.myshiftmanager.Managers.BottomMenuManager;
 import roman.game.myshiftmanager.R;
 
 public class Activity_Panel extends AppCompatActivity {
+    public final int PROFILE = BottomMenuManager.PROFILE, CALENDAR = BottomMenuManager.CALENDAR,
+            REPORTS = BottomMenuManager.REPORTS, SETTINGS = BottomMenuManager.SETTINGS, SIZE = BottomMenuManager.SIZE;
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    private Fragment_Profile panel_fragment_profile;
-    private Fragment_Calendar panel_fragment_calendar;
-    private Fragment_Reports panel_fragment_reports;
-    private Fragment_Settings panel_fragment_settings;
+
+    private Fragment[] panel_fragments;
     private MaterialToolbar panel_TLB_toolbar;
-    private MaterialButton panel_BTN_profile, panel_BTN_calendar, panel_BTN_reports, panel_BTN_settings;
+    private MaterialButton[] panel_BTN_bottomMenu;
+
+    private BottomMenuManager bottomMenuManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,64 +49,37 @@ public class Activity_Panel extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         panel_TLB_toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        panel_BTN_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragments(panel_fragment_profile);
-                panel_TLB_toolbar.setTitle(R.string.profile);
-                panel_BTN_profile.setIcon(getDrawable(R.drawable.img_profile_selected));
-                panel_BTN_calendar.setIcon(getDrawable(R.drawable.img_calendar));
-                panel_BTN_reports.setIcon(getDrawable(R.drawable.img_report));
-                panel_BTN_settings.setIcon(getDrawable(R.drawable.img_settings));
-            }
-        });
+        bottomMenuManager = BottomMenuManager.getInstance();
+        bottomMenuManager.onStartView(panel_BTN_bottomMenu, panel_TLB_toolbar);
+        replaceFragments(panel_fragments[PROFILE]);
 
-        panel_BTN_calendar.setOnClickListener(new View.OnClickListener() {
+        OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragments(panel_fragment_calendar);
-                panel_TLB_toolbar.setTitle(R.string.calendar);
-                panel_BTN_profile.setIcon(getDrawable(R.drawable.img_profile));
-                panel_BTN_calendar.setIcon(getDrawable(R.drawable.img_calendar_selected));
-                panel_BTN_reports.setIcon(getDrawable(R.drawable.img_report));
-                panel_BTN_settings.setIcon(getDrawable(R.drawable.img_settings));
+                int pos = PROFILE;
+                try {
+                    pos = (Integer)v.getTag();
+                    Log.d("pttt", "pos:" + pos);
+                }catch (Exception e){
+                    return;
+                }
+                bottomMenuManager.onClickView(pos, panel_BTN_bottomMenu, panel_TLB_toolbar);
+                replaceFragments(panel_fragments[pos]);
             }
-        });
+        };
 
-        panel_BTN_reports.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragments(panel_fragment_reports);
-                panel_TLB_toolbar.setTitle(R.string.reports);
-                panel_BTN_profile.setIcon(getDrawable(R.drawable.img_profile));
-                panel_BTN_calendar.setIcon(getDrawable(R.drawable.img_calendar));
-                panel_BTN_reports.setIcon(getDrawable(R.drawable.img_report_selected));
-                panel_BTN_settings.setIcon(getDrawable(R.drawable.img_settings));
-            }
-        });
-
-        panel_BTN_settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragments(panel_fragment_settings);
-                panel_TLB_toolbar.setTitle(R.string.settings);
-                panel_BTN_profile.setIcon(getDrawable(R.drawable.img_profile));
-                panel_BTN_calendar.setIcon(getDrawable(R.drawable.img_calendar));
-                panel_BTN_reports.setIcon(getDrawable(R.drawable.img_report));
-                panel_BTN_settings.setIcon(getDrawable(R.drawable.img_settings_selected));
-            }
-        });
+        panel_BTN_bottomMenu[PROFILE].setOnClickListener(onClickListener);
+        panel_BTN_bottomMenu[CALENDAR].setOnClickListener(onClickListener);
+        panel_BTN_bottomMenu[REPORTS].setOnClickListener(onClickListener);
+        panel_BTN_bottomMenu[SETTINGS].setOnClickListener(onClickListener);
     }
 
     private void setFragments() {
-        panel_fragment_profile = new Fragment_Profile();
-        panel_fragment_profile.setActivity(this);
-        panel_fragment_calendar = new Fragment_Calendar();
-        panel_fragment_calendar.setActivity(this);
-        panel_fragment_reports = new Fragment_Reports();
-        panel_fragment_reports.setActivity(this);
-        panel_fragment_settings = new Fragment_Settings();
-        panel_fragment_settings.setActivity(this);
+        panel_fragments = new Fragment[SIZE];
+        panel_fragments[PROFILE] = new Fragment_Profile().setActivity(this);
+        panel_fragments[CALENDAR] = new Fragment_Calendar().setActivity(this);
+        panel_fragments[REPORTS] = new Fragment_Reports().setActivity(this);
+        panel_fragments[SETTINGS] = new Fragment_Settings().setActivity(this);
     }
 
     private void replaceFragments(Fragment fragment){
@@ -113,12 +91,17 @@ public class Activity_Panel extends AppCompatActivity {
 
     private void findViews() {
         panel_TLB_toolbar = findViewById(R.id.panel_TLB_toolbar);
-        panel_BTN_profile = findViewById(R.id.panel_BTN_profile);
-        panel_BTN_calendar = findViewById(R.id.panel_BTN_calendar);
-        panel_BTN_reports = findViewById(R.id.panel_BTN_reports);
-        panel_BTN_settings = findViewById(R.id.panel_BTN_settings);
-    }
 
+        panel_BTN_bottomMenu = new MaterialButton[SIZE];
+        panel_BTN_bottomMenu[PROFILE] = findViewById(R.id.panel_BTN_profile);
+        panel_BTN_bottomMenu[PROFILE].setTag(new Integer(PROFILE));
+        panel_BTN_bottomMenu[CALENDAR] = findViewById(R.id.panel_BTN_calendar);
+        panel_BTN_bottomMenu[CALENDAR].setTag(new Integer(CALENDAR));
+        panel_BTN_bottomMenu[REPORTS] = findViewById(R.id.panel_BTN_reports);
+        panel_BTN_bottomMenu[REPORTS].setTag(new Integer(REPORTS));
+        panel_BTN_bottomMenu[SETTINGS] = findViewById(R.id.panel_BTN_settings);
+        panel_BTN_bottomMenu[SETTINGS].setTag(new Integer(SETTINGS));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

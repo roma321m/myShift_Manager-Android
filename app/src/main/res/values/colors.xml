@@ -4,6 +4,8 @@
     <color name="red_200">#FFF23B5F</color>
     <color name="red_400">#FF893A54</color>
     <color name="red_700">#FF443A4E</color>
+    <color name="grey_100">#4DFFFFFF</color>
+    <color name="grey_200">#80FFFFFF</color>
     <color name="grey_700">#FF253A4B</color>
     <color name="grey_0">#00253A4B</color>
     <color name="white_100">#FFF8F8F8</color>

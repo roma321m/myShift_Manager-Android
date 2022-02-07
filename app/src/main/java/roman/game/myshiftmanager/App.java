@@ -4,6 +4,7 @@ import android.app.Application;
 
 import roman.game.myshiftmanager.DB.MSP;
 import roman.game.myshiftmanager.Managers.BottomMenuManager;
+import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
 import roman.game.myshiftmanager.Managers.VibrationSensorManager;
 
 public class App extends Application {
@@ -13,6 +14,7 @@ public class App extends Application {
         super.onCreate();
 
         // initHelpers here
+        FirebaseAuthManager.initHelper(this);
         BottomMenuManager.initHelper(this);
         MSP.initHelper(this);
         VibrationSensorManager.initHelper(this);

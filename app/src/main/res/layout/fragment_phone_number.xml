@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Activity_Login"
+    android:background="@drawable/img_phone_background"
+    android:orientation="vertical">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/phone_BTN_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="50dp"
+        android:background ="@drawable/rounded_alpha"
+        android:gravity="center"
+        app:icon="@drawable/img_back_arrow"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="36dp"
+        app:iconTint="@color/red_200" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/phone_LBL_title"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:maxLines="1"
+        android:minLines="1"
+        android:scaleType="centerCrop"
+        android:text="@string/phone_title"
+        android:textColor="@color/grey_700" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/phone_LBL_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_weight="1"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:maxLines="1"
+        android:minLines="1"
+        android:scaleType="centerCrop"
+        android:text="@string/phone_text"
+        android:textColor="@color/grey_700" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/phone_textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        app:boxBackgroundColor="@color/white_100"
+        app:boxStrokeColor="@color/grey_700"
+        android:hint="@string/phone_hint"
+        app:counterEnabled="true"
+        app:counterMaxLength="9"
+        app:counterTextColor="@color/grey_700"
+        app:boxStrokeErrorColor="@color/red_200"
+        app:placeholderTextColor="@color/grey_700"
+        app:prefixText="+972"
+        app:prefixTextColor="@color/grey_700">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_textInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="9"
+            android:textColor="@color/grey_700"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/phone_BTN_login"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/rounded_button"
+        android:text="@string/phone_login"
+        android:textAllCaps="false"
+        android:textColor="@color/white_100" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

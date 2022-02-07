@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "987649224642",
-    "firebase_url": "https://myshift-manager-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "myshift-manager",
-    "storage_bucket": "myshift-manager.appspot.com"
+    "project_number": "38731919584",
+    "project_id": "myshiftmanager-d9445",
+    "storage_bucket": "myshiftmanager-d9445.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:987649224642:android:25c7ee9a4b15e0a680f05b",
+        "mobilesdk_app_id": "1:38731919584:android:c55daf7b684156d2c8a085",
         "android_client_info": {
           "package_name": "roman.game.myshiftmanager"
         }
       },
       "oauth_client": [
         {
-          "client_id": "987649224642-tqt50st3p5grg6uonua08704p3rnthbl.apps.googleusercontent.com",
+          "client_id": "38731919584-dqdv90rj3i7m833v2bakqfr4jfct62ku.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "roman.game.myshiftmanager",
+            "certificate_hash": "2c63424cc4f205d99f0d5189fa46a984dfd3e835"
+          }
+        },
+        {
+          "client_id": "38731919584-otk8us1r3g42kgu2ibhd8b9lcfn95is5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "${FIERBASE_API_KEY}"
+          "current_key": "AIzaSyCYwXq9sa5LkHnBP0z1A-3ydqmplCoFRq8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "987649224642-tqt50st3p5grg6uonua08704p3rnthbl.apps.googleusercontent.com",
+              "client_id": "38731919584-otk8us1r3g42kgu2ibhd8b9lcfn95is5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

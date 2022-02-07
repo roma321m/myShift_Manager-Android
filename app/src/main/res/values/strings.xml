@@ -6,4 +6,24 @@
     <string name="calendar">Calendar</string>
     <string name="profile">Profile</string>
     <string name="title">Title</string>
+
+    <string name="login_title">Welcome!</string>
+    <string name="login_subtitle">Nice to see you,</string>
+    <string name="login_text">Choose one of the options to login</string>
+    <string name="login_btn_phone">Phone</string>
+    <string name="login_btn_gmail">Gmail</string>
+
+    <string name="phone_title">Phone Number</string>
+    <string name="phone_text">Please enter your phone number to continue</string>
+    <string name="phone_hint">Number</string>
+    <string name="phone_helper">Required*</string>
+    <string name="phone_login">Login</string>
+
+    <string name="phone_verification_title">Verification Code</string>
+    <string name="phone_verification_text">Please enter the verification code we sent to</string>
+    <string name="phone_verification_hint">Code</string>
+    <string name="phone_verification_continue">Continue</string>
+    <string name="phone_verification_number">Number</string>
+    <string name="phone_verification_resend_text">Did not get OTP? <b>Resend</b></string>
+
 </resources>

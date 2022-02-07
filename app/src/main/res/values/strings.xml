@@ -26,4 +26,14 @@
     <string name="phone_verification_number">Number</string>
     <string name="phone_verification_resend_text">Did not get OTP? <b>Resend</b></string>
 
+    <string name="make_first_name">First Name</string>
+    <string name="make_last_name">Last Name</string>
+    <string name="make_email">Email</string>
+    <string name="make_currency">Choose currency</string>
+    <string-array name="currency">
+        <item>Shekel</item>
+        <item>US Dollar</item>
+        <item>Euro</item>
+    </string-array>
+
 </resources>

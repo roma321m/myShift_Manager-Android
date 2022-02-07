@@ -1,6 +1,8 @@
 package roman.game.myshiftmanager.Activities;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseUser;
@@ -13,6 +15,8 @@ public class Activity_MakeProfile extends AppCompatActivity {
     private FirebaseUser fbUser;
     private String userID;
 
+    private AutoCompleteTextView make_autoCompleteTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +26,14 @@ public class Activity_MakeProfile extends AppCompatActivity {
 
         fbUser = FirebaseAuthManager.getInstance().getUser();
         userID = fbUser.getUid();
+
+        String[] currency = getResources().getStringArray(R.array.currency);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_currency, currency);
+        make_autoCompleteTextView.setAdapter(arrayAdapter);
+
     }
 
     private void findViews() {
-        //panel_TLB_toolbar = findViewById(R.id.panel_TLB_toolbar);
+        make_autoCompleteTextView = findViewById(R.id.make_autoCompleteTextView);
     }
 }

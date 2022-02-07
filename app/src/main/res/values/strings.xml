@@ -30,10 +30,12 @@
     <string name="make_last_name">Last Name</string>
     <string name="make_email">Email</string>
     <string name="make_currency">Choose currency</string>
+    <string name="make_register">Register</string>
+
     <string-array name="currency">
-        <item>Shekel</item>
-        <item>US Dollar</item>
-        <item>Euro</item>
+        <item>₪  Shekel</item>
+        <item>$  US Dollar</item>
+        <item>€  Euro</item>
     </string-array>
 
 </resources>

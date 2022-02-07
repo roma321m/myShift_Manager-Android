@@ -16,8 +16,9 @@ import roman.game.myshiftmanager.Objects.User;
 
 public class FirebaseDB {
 
-    public interface Callback_splashCheck{
+    public interface Callback_splashCheck {
         void profileExist(String userID);
+
         void makeProfile();
     }
 
@@ -46,26 +47,28 @@ public class FirebaseDB {
         return this;
     }
 
-    public void createUser(User user){
-        usersRef.setValue(user.getUserID(),user).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Log.d("pttt", "data added to firebase");
-            }
-        });
+    public void createUser(User user) {
+        if (user != null && user.getUserID() != null) {
+            usersRef.child(user.getUserID()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Log.d("pttt", "data added to firebase");
+                }
+            });
+        }
     }
 
-    public void hasProfile(String userID){
+    public void hasProfile(String userID) {
         // FIXME: 07/02/2022 - not working 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("tfff",   "1");
-                if(!dataSnapshot.exists()) {
-                    Log.d("tfff",   "2");
+                Log.d("tfff", "1");
+                if (!dataSnapshot.exists()) {
+                    Log.d("tfff", "2");
                     callback_splashCheck.makeProfile();
-                }else{
-                    Log.d("tfff",   "2");
+                } else {
+                    Log.d("tfff", "2");
                     callback_splashCheck.profileExist(userID);
                 }
             }

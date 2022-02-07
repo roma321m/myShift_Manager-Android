@@ -8,16 +8,30 @@ public class User {
     private String userID;
 
     private String firstName;
-    private String LastName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
     private ArrayList<Workplace> works;
     private ArrayList<Shift> shifts;
 
     public User(){}
 
-    public User(String id, String fName, String lName){
-        setUserID(id);
-        setFirstName(fName);
-        setLastName(lName);
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public User setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public User setEmail(String email) {
+        this.email = email;
+        return this;
     }
 
     public String getWorksID() {
@@ -57,11 +71,11 @@ public class User {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public User setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
         return this;
     }
 

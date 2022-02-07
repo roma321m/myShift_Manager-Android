@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -97,6 +98,10 @@ public class FirebaseAuthManager {
     public FirebaseAuthManager setCallback_moveToProfile(Callback_MoveToProfile callback_moveToProfile) {
         this.callback_moveToProfile = callback_moveToProfile;
         return this;
+    }
+
+    public FirebaseUser getUser(){
+        return firebaseAuth.getCurrentUser();
     }
 
     public void phoneNumberEntered(String number){

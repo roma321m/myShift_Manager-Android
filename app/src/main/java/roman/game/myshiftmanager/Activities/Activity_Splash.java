@@ -9,7 +9,12 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
+
+import roman.game.myshiftmanager.DB.FirebaseDB;
+import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
 import roman.game.myshiftmanager.R;
 
 public class Activity_Splash extends AppCompatActivity {
@@ -20,6 +25,9 @@ public class Activity_Splash extends AppCompatActivity {
 
     private ImageView splash_IMG_logo;
 
+    FirebaseAuthManager firebaseAuthManager;
+    FirebaseDB firebaseDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +36,10 @@ public class Activity_Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         findViews();
+
+        firebaseAuthManager = FirebaseAuthManager.getInstance();
+        firebaseDB = FirebaseDB.getInstance();
+        firebaseDB.setCallback_splashCheck(callback_splashCheck);
 
         splash_IMG_logo.setVisibility(View.INVISIBLE);
 
@@ -73,11 +85,19 @@ public class Activity_Splash extends AppCompatActivity {
     }
 
     private void animationDone() {
-        openLoginActivity();
+        FirebaseUser user = firebaseAuthManager.getUser();
+        if(user != null){
+            // FIXME: 07/02/2022 firebaseDB.hasProfile(user.getUid());
+            //temp
+            Toast.makeText(this, ""+user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
+            openActivity(Activity_Panel.class);
+        }else{
+            openActivity(Activity_Login.class);
+        }
     }
 
-    private void openLoginActivity() {
-        Intent intent = new Intent(this, Activity_Login.class);
+    private void openActivity(Class activity) {
+        Intent intent = new Intent(this, activity);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
@@ -86,4 +106,17 @@ public class Activity_Splash extends AppCompatActivity {
     private void findViews() {
         splash_IMG_logo = findViewById(R.id.splash_IMG_logo);
     }
+
+    FirebaseDB.Callback_splashCheck callback_splashCheck = new FirebaseDB.Callback_splashCheck() {
+        @Override
+        public void profileExist(String userID) {
+            Toast.makeText(Activity_Splash.this, ""+userID, Toast.LENGTH_SHORT).show();
+            openActivity(Activity_Panel.class);
+        }
+
+        @Override
+        public void makeProfile() {
+            openActivity(Activity_MakeProfile.class);
+        }
+    };
 }

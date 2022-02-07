@@ -33,6 +33,11 @@
             android:screenOrientation="portrait"/>
 
         <activity
+            android:name=".Activities.Activity_MakeProfile"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".Activities.Activity_Login"
             android:exported="true"
             android:screenOrientation="portrait" />

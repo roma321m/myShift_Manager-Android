@@ -15,10 +15,10 @@ import android.view.View.OnClickListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 
-import roman.game.myshiftmanager.Fragments.Fragment_Calendar;
-import roman.game.myshiftmanager.Fragments.Fragment_Profile;
-import roman.game.myshiftmanager.Fragments.Fragment_Reports;
-import roman.game.myshiftmanager.Fragments.Fragment_Settings;
+import roman.game.myshiftmanager.Fragments.Panel.Fragment_Calendar;
+import roman.game.myshiftmanager.Fragments.Panel.Fragment_Profile;
+import roman.game.myshiftmanager.Fragments.Panel.Fragment_Reports;
+import roman.game.myshiftmanager.Fragments.Panel.Fragment_Settings;
 
 import roman.game.myshiftmanager.Managers.BottomMenuManager;
 import roman.game.myshiftmanager.R;

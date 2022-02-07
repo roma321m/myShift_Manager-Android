@@ -1,4 +1,4 @@
-package roman.game.myshiftmanager.Fragments;
+package roman.game.myshiftmanager.Fragments.Panel;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

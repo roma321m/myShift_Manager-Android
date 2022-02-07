@@ -9,9 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
-import roman.game.myshiftmanager.Fragments.Fragment_Login;
-import roman.game.myshiftmanager.Fragments.Fragment_PhoneNumber;
-import roman.game.myshiftmanager.Fragments.Fragment_PhoneNumberVerification;
+import roman.game.myshiftmanager.Fragments.Login.Fragment_Login;
+import roman.game.myshiftmanager.Fragments.Login.Fragment_PhoneNumber;
+import roman.game.myshiftmanager.Fragments.Login.Fragment_PhoneNumberVerification;
 import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
 import roman.game.myshiftmanager.R;
 

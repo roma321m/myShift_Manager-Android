@@ -37,6 +37,14 @@
     <string name="settings_time">Time format</string>
     <string name="settings_date">Date format</string>
     <string name="settings_add_workplace">Add workplace</string>
+    <!-- profile -->
+    <string name="profile_first_name"> <b>First Name:</b></string>
+    <string name="profile_last_name"> <b>Last Name:</b></string>
+    <string name="profile_email"> <b>Email:</b></string>
+    <string name="profile_currency"> <b>Currency:</b></string>
+    <string name="profile_temp">Text..........</string>
+    <string name="profile_add_workplace">Add workplace</string>
+    <string name="profile_logout">Log out</string>
 
     <string-array name="currency">
         <item>₪  Shekel</item>

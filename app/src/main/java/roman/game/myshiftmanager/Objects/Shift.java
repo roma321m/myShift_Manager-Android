@@ -2,20 +2,26 @@ package roman.game.myshiftmanager.Objects;
 
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Shift {
+
     private Date start;
     private Date end;
     private Workplace workplace;
-    private double totalTime;
+    private double totalTime; // in hours
+    private double revenue;
 
-    public Shift(){};
+    public Shift() {
+    }
 
-    public Shift(Date start, Date end, Workplace workplace, double totalTime) {
-        this.start = start;
-        this.end = end;
-        this.workplace = workplace;
-        this.totalTime = totalTime;
+    ;
+
+    public Shift(Date start, Date end, Workplace workplace) {
+        setStart(start);
+        setEnd(end);
+        setWorkplace(workplace);
+        setTotalTime();
     }
 
     public Date getStart() {
@@ -49,8 +55,22 @@ public class Shift {
         return totalTime;
     }
 
-    public Shift setTotalTime(double totalTime) {
-        this.totalTime = totalTime;
+    public Shift setTotalTime() {
+        if (start == null || end == null)
+            return this;
+        long diffInMillies = Math.abs(end.getTime() - start.getTime());
+        this.totalTime = TimeUnit.HOURS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        return this;
+    }
+
+    public double getRevenue() {
+        return revenue;
+    }
+
+    public Shift setRevenue() {
+        if (workplace == null)
+            return this;
+        this.revenue = totalTime * workplace.getHourlyWage();
         return this;
     }
 }

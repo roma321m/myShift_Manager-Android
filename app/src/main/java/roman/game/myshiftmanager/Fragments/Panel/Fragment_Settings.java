@@ -13,17 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.auth.FirebaseUser;
 
-import roman.game.myshiftmanager.DB.FirebaseDB;
-import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
 import roman.game.myshiftmanager.R;
 
 public class Fragment_Settings extends Fragment {
-
-    private FirebaseUser fbUser;
-    private String userID;
-    private FirebaseDB firebaseDB;
 
     private AppCompatActivity activity;
 
@@ -32,7 +25,8 @@ public class Fragment_Settings extends Fragment {
     private AutoCompleteTextView settings_autoCompleteTextView_date;
     private MaterialButton settings_BTN_add, settings_BTN_currency, settings_BTN_time, settings_BTN_date;
 
-    public Fragment_Settings(){};
+    public Fragment_Settings() {
+    }
 
     public Fragment_Settings setActivity(AppCompatActivity activity) {
         this.activity = activity;
@@ -51,11 +45,6 @@ public class Fragment_Settings extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         findViews(view);
-
-        fbUser = FirebaseAuthManager.getInstance().getUser();
-        userID = fbUser.getUid();
-
-        firebaseDB = FirebaseDB.getInstance();
 
         setDropdown();
 
@@ -95,7 +84,7 @@ public class Fragment_Settings extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // TODO: 08/02/2022 - open save button
-                Toast.makeText(activity, "item"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "item" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -103,7 +92,7 @@ public class Fragment_Settings extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // TODO: 08/02/2022 - open save button
-                Toast.makeText(activity, "item"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "item" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -111,14 +100,14 @@ public class Fragment_Settings extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // TODO: 08/02/2022 - open save button
-                Toast.makeText(activity, "item"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "item" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
     }
 
-    private void setDropdown(){
+    private void setDropdown() {
         String[] currency = getResources().getStringArray(R.array.currency);
         ArrayAdapter arrayAdapterCurrency = new ArrayAdapter(activity, R.layout.dropdown_item, currency);
         settings_autoCompleteTextView_currency.setAdapter(arrayAdapterCurrency);

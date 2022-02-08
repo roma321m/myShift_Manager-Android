@@ -90,7 +90,8 @@ public class Activity_Splash extends AppCompatActivity {
             // FIXME: 07/02/2022 firebaseDB.hasProfile(user.getUid());
             //temp
             Toast.makeText(this, ""+user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
-            openActivity(Activity_MakeProfile.class);
+            openActivity(Activity_Panel.class);
+            //
         }else{
             openActivity(Activity_Login.class);
         }

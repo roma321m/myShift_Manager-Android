@@ -31,6 +31,12 @@ public class Activity_MakeProfile extends AppCompatActivity {
     private MaterialButton make_BTN_register;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setDropdown();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_profile);
@@ -42,9 +48,7 @@ public class Activity_MakeProfile extends AppCompatActivity {
 
         firebaseDB = FirebaseDB.getInstance();
 
-        String[] currency = getResources().getStringArray(R.array.currency);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_currency, currency);
-        make_autoCompleteTextView.setAdapter(arrayAdapter);
+        setDropdown();
 
         make_BTN_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +56,12 @@ public class Activity_MakeProfile extends AppCompatActivity {
                 registerUser();
             }
         });
+    }
+
+    private void setDropdown(){
+        String[] currency = getResources().getStringArray(R.array.currency);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_item, currency);
+        make_autoCompleteTextView.setAdapter(arrayAdapter);
     }
 
     private void registerUser() {

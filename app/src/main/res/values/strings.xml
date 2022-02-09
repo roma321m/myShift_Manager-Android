@@ -49,6 +49,27 @@
     <string name="reports_month">February 22</string>
     <string name="reports_amount">1500</string>
     <string name="reports_currency">₪</string>
+    <!-- workplace -->
+    <string name="workplace_title"> <b>Workplace</b></string>
+    <string name="workplace_name">Workplace Name</string>
+    <string name="workplace_color">Select indicator color</string>
+    <string name="workplace_hourly_wage">Hourly Wage</string>
+    <string name="workplace_vacation">Vacation payments</string>
+    <string name="workplace_deduction">Deduction pre shift</string>
+    <string name="workplace_bonuses">Bonuses pre shift</string>
+    <string name="workplace_break">Break time (unpaid in minutes)</string>
+    <string name="workplace_daily_travel_expenses">Daily travel expenses</string>
+    <string name="workplace_monthly_travel_expenses">Monthly travel expenses</string>
+    <string name="workplace_save">Save</string>
+    <!-- shift -->
+    <string name="shift_title"> <b>Shift</b></string>
+    <string name="shift_workplace">Selected workplace:</string>
+    <string name="shift_workplace_name">Name</string>
+    <string name="shift_from">From</string>
+    <string name="shift_to">To</string>
+    <string name="shift_total_time">00:00 Hours</string>
+    <string name="shift_remove">Remove this shift</string>
+
     <!-- shift_item -->
     <string name="shift_item_title_workplace"> <b>Workplace:</b></string>
     <string name="shift_item_title_start"> <b>Shift started:</b></string>

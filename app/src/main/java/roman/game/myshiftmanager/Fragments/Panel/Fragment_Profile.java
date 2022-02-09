@@ -1,5 +1,6 @@
 package roman.game.myshiftmanager.Fragments.Panel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
+import roman.game.myshiftmanager.Activities.Activity_MakeWorkplace;
 import roman.game.myshiftmanager.R;
 
 public class Fragment_Profile extends Fragment {
@@ -41,8 +43,7 @@ public class Fragment_Profile extends Fragment {
         profile_BTN_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 08/02/2022 - move to add workplace activity
-                Toast.makeText(activity, "clicked", Toast.LENGTH_SHORT).show();
+                openActivity(Activity_MakeWorkplace.class);
             }
         });
 
@@ -59,6 +60,12 @@ public class Fragment_Profile extends Fragment {
 
     private void setData() {
         // TODO: 08/02/2022 - set all the texts and picture with the user data from db
+    }
+
+    private void openActivity(Class activity) {
+        Intent intent = new Intent(this.activity, activity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
     }
 
     private void findViews(View view) {

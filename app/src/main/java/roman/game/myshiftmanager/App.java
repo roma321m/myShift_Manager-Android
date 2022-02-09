@@ -5,6 +5,7 @@ import android.app.Application;
 import roman.game.myshiftmanager.DB.MSP;
 import roman.game.myshiftmanager.Managers.BottomMenuManager;
 import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
+import roman.game.myshiftmanager.Managers.ReportsMonthManager;
 import roman.game.myshiftmanager.Managers.VibrationSensorManager;
 
 public class App extends Application {

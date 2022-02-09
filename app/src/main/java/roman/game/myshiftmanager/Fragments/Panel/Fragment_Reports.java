@@ -15,19 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import roman.game.myshiftmanager.Adapters.Adapter_Shift;
+import roman.game.myshiftmanager.Managers.ReportsMonthManager;
 import roman.game.myshiftmanager.Objects.Shift;
 import roman.game.myshiftmanager.Objects.Workplace;
 import roman.game.myshiftmanager.R;
 
 public class Fragment_Reports extends Fragment {
-
-    public static final String[] DATES = {"", "January", "February", "March", "April", "May",
-            "June", "July", "August", "September", "October", "November", "December"};
 
     private AppCompatActivity activity;
 
@@ -36,7 +36,8 @@ public class Fragment_Reports extends Fragment {
 
     private MaterialTextView reports_LBL_month, reports_LBL_amount, reports_LBL_currency;
     private MaterialButton reports_BTN_right, reports_BTN_left;
-    private int month, year;
+
+    private ReportsMonthManager reportsMonthManager;
 
     public Fragment_Reports() {
     }
@@ -52,22 +53,27 @@ public class Fragment_Reports extends Fragment {
 
         findViews(view);
 
+        reportsMonthManager = ReportsMonthManager.getInstance();
+        reportsMonthManager.setViews(reports_LBL_month, reports_LBL_amount, reports_LBL_currency);
+
         linearLayoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
         reports_LST_shifts.setLayoutManager(linearLayoutManager);
         reports_LST_shifts.setHasFixedSize(true);
         reports_LST_shifts.setItemAnimator(new DefaultItemAnimator());
 
+        reportsMonthManager.setNewMonthViews();
+
         reports_BTN_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 08/02/2022 - set new month and year - change the shift list
+                reportsMonthManager.previousMonthAction();
             }
         });
 
         reports_BTN_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 08/02/2022 - set new month and year - change the shift list
+                reportsMonthManager.nextMonthAction();
             }
         });
 
@@ -110,21 +116,6 @@ public class Fragment_Reports extends Fragment {
                 // TODO: 08/02/2022 - popup for conformation
             }
         });
-    }
-
-    private void setDate() {
-        // TODO: 08/02/2022 - set the month and the year to change the text view 
-        Date today = Calendar.getInstance().getTime();
-        month = today.getMonth();
-        year = today.getYear();
-    }
-
-    private void setCurrency() {
-        // TODO: 08/02/2022 - set the text view based on the currency in db
-    }
-
-    private void setAmount() {
-        // TODO: 08/02/2022 - set the text view based on the total revenue on the list for the related month
     }
 
     private void findViews(View view) {

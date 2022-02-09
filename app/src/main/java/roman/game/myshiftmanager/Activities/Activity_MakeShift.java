@@ -9,6 +9,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
+import roman.game.myshiftmanager.Managers.DateTimeDialogManager;
 import roman.game.myshiftmanager.R;
 
 public class Activity_MakeShift extends AppCompatActivity {
@@ -17,12 +18,29 @@ public class Activity_MakeShift extends AppCompatActivity {
     private MaterialTextView shift_LBL_total_time, shift_LBL_workplace_name;
     private TextInputEditText shift_textInputEditText_from, shift_textInputEditText_to;
 
+    private DateTimeDialogManager dateTimeDialogManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_shift);
 
         findViews();
+        dateTimeDialogManager = DateTimeDialogManager.getInstance();
+
+        shift_textInputEditText_from.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateTimeDialogManager.setDateTimeDialog(Activity_MakeShift.this, shift_textInputEditText_from);
+            }
+        });
+
+        shift_textInputEditText_to.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateTimeDialogManager.setDateTimeDialog(Activity_MakeShift.this, shift_textInputEditText_to);
+            }
+        });
 
         shift_BTN_back.setOnClickListener(new View.OnClickListener() {
             @Override

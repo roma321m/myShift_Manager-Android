@@ -122,7 +122,12 @@
             android:id="@+id/shift_textInputEditText_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
+            android:focusableInTouchMode="true"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:inputType="text"
+            android:textIsSelectable="true"
+            android:textAlignment="center"
             android:textColor="@color/grey_700"
             app:hintTextColor="@color/grey_700" />
 
@@ -152,7 +157,12 @@
             android:id="@+id/shift_textInputEditText_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
+            android:focusableInTouchMode="true"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:inputType="text"
+            android:textIsSelectable="true"
+            android:textAlignment="center"
             android:textColor="@color/grey_700"
             app:hintTextColor="@color/grey_700" />
 

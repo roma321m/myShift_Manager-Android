@@ -14,6 +14,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
+import roman.game.myshiftmanager.Activities.Activity_MakeShift;
 import roman.game.myshiftmanager.Activities.Activity_MakeWorkplace;
 import roman.game.myshiftmanager.R;
 
@@ -21,7 +22,7 @@ public class Fragment_Profile extends Fragment {
 
     private AppCompatActivity activity;
 
-    private MaterialButton profile_BTN_add, profile_BTN_logout;
+    private MaterialButton profile_BTN_add_workplace, profile_BTN_add_shift, profile_BTN_logout;
     private ShapeableImageView profile_IMG_pic;
     private MaterialTextView profile_LBL_first_name, profile_LBL_last_name, profile_LBL_email, profile_LBL_currency;
 
@@ -40,10 +41,18 @@ public class Fragment_Profile extends Fragment {
 
         setData();
 
-        profile_BTN_add.setOnClickListener(new View.OnClickListener() {
+        profile_BTN_add_workplace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openActivity(Activity_MakeWorkplace.class);
+            }
+        });
+
+        profile_BTN_add_shift.setOnClickListener(new View.OnClickListener() {
+            @Override
+            // FIXME: 09/02/2022 - open only if the user has existing workplace 
+            public void onClick(View v) {
+                openActivity(Activity_MakeShift.class);
             }
         });
 
@@ -69,7 +78,8 @@ public class Fragment_Profile extends Fragment {
     }
 
     private void findViews(View view) {
-        profile_BTN_add = view.findViewById(R.id.profile_BTN_add);
+        profile_BTN_add_workplace = view.findViewById(R.id.profile_BTN_add_workplace);
+        profile_BTN_add_shift = view.findViewById(R.id.profile_BTN_add_shift);
         profile_BTN_logout = view.findViewById(R.id.profile_BTN_logout);
         profile_IMG_pic = view.findViewById(R.id.profile_IMG_pic);
         profile_LBL_first_name = view.findViewById(R.id.profile_LBL_first_name);

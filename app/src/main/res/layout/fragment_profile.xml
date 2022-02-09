@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_background_white"
+    android:background="@color/white_100"
     tools:context=".Activities.Activity_Panel">
 
     <View
@@ -165,13 +165,13 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/profile_BTN_add"
+        android:id="@+id/profile_BTN_add_workplace"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@+id/profile_Layout_4"
         android:layout_gravity="start"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginEnd="40dp"
         android:autoSizeMaxTextSize="24sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/right_rounded_button"
@@ -180,13 +180,28 @@
         android:textColor="@color/white_100" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/profile_BTN_add_shift"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/profile_BTN_add_workplace"
+        android:layout_gravity="start"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:autoSizeMaxTextSize="24sp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/right_rounded_button"
+        android:text="@string/profile_add_shift"
+        android:textAllCaps="false"
+        android:textColor="@color/white_100" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/profile_BTN_logout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@+id/profile_BTN_add"
+        android:layout_below="@+id/profile_BTN_add_shift"
         android:layout_gravity="start"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginEnd="40dp"
         android:autoSizeMaxTextSize="24sp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/right_rounded_button"

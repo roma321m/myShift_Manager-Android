@@ -44,6 +44,7 @@
     <string name="profile_currency"> <b>Currency:</b></string>
     <string name="profile_temp">Text..........</string>
     <string name="profile_add_workplace">Add workplace</string>
+    <string name="profile_add_shift">Add shift</string>
     <string name="profile_logout">Log out</string>
     <!-- reports -->
     <string name="reports_month">February 22</string>
@@ -69,6 +70,7 @@
     <string name="shift_to">To</string>
     <string name="shift_total_time">00:00 Hours</string>
     <string name="shift_remove">Remove this shift</string>
+    <string name="shift_create">Create</string>
 
     <!-- shift_item -->
     <string name="shift_item_title_workplace"> <b>Workplace:</b></string>

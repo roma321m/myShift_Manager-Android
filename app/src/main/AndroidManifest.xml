@@ -46,6 +46,11 @@
             android:name=".Activities.Activity_MakeWorkplace"
             android:exported="true"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".Activities.Activity_MakeShift"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

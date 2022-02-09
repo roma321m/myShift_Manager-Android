@@ -59,7 +59,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:maxLength="20"
             app:hintTextColor="@color/grey_700"
             android:textColor="@color/grey_700"/>
 
@@ -90,7 +89,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:maxLength="20"
             app:hintTextColor="@color/grey_700"
             android:textColor="@color/grey_700"/>
 
@@ -121,7 +119,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:maxLength="20"
             app:hintTextColor="@color/grey_700"
             android:textColor="@color/grey_700"/>
 
@@ -152,7 +149,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:maxLength="20"
             app:hintTextColor="@color/grey_700"
             android:textColor="@color/grey_700"/>
 
@@ -183,7 +179,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:maxLength="20"
             app:hintTextColor="@color/grey_700"
             android:textColor="@color/grey_700"/>
 
@@ -193,7 +188,7 @@
         android:id="@+id/workplace_textInputLayout_break"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/workplace_textInputLayout_deduction"
+        android:layout_below="@+id/workplace_textInputLayout_bonuses"
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -244,7 +239,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:maxLength="20"
             app:hintTextColor="@color/grey_700"
             android:textColor="@color/grey_700"/>
 
@@ -290,6 +284,7 @@
         android:layout_above="@+id/workplace_BTN_save">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/workplace_IMG_blue"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -299,6 +294,7 @@
             android:src="@drawable/ic_baseline_brightness_1_24"/>
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/workplace_IMG_green"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -308,6 +304,7 @@
             android:src="@drawable/ic_baseline_brightness_1_24"/>
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/workplace_IMG_red"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -317,6 +314,7 @@
             android:src="@drawable/ic_baseline_brightness_1_24"/>
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/workplace_IMG_purple"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"

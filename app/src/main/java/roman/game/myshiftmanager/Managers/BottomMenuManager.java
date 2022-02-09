@@ -40,7 +40,7 @@ public class BottomMenuManager {
             case CALENDAR:
                 toolbar.setTitle(R.string.calendar);
                 bottomMenu[PROFILE].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
-                bottomMenu[CALENDAR].setIconTint(ColorStateList.valueOf(context.getColor(R.color.red_200)));
+                bottomMenu[CALENDAR].setIconTint(ColorStateList.valueOf(context.getColor(R.color.red_400)));
                 bottomMenu[REPORTS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
                 bottomMenu[SETTINGS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
                 Log.d("pttt", "icon");
@@ -49,7 +49,7 @@ public class BottomMenuManager {
                 toolbar.setTitle(R.string.reports);
                 bottomMenu[PROFILE].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
                 bottomMenu[CALENDAR].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
-                bottomMenu[REPORTS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.red_200)));
+                bottomMenu[REPORTS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.red_400)));
                 bottomMenu[SETTINGS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
                 break;
             case SETTINGS:
@@ -57,11 +57,11 @@ public class BottomMenuManager {
                 bottomMenu[PROFILE].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
                 bottomMenu[CALENDAR].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
                 bottomMenu[REPORTS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
-                bottomMenu[SETTINGS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.red_200)));
+                bottomMenu[SETTINGS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.red_400)));
                 break;
             default:
                 toolbar.setTitle(R.string.profile);
-                bottomMenu[PROFILE].setIconTint(ColorStateList.valueOf(context.getColor(R.color.red_200)));
+                bottomMenu[PROFILE].setIconTint(ColorStateList.valueOf(context.getColor(R.color.red_400)));
                 bottomMenu[CALENDAR].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
                 bottomMenu[REPORTS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));
                 bottomMenu[SETTINGS].setIconTint(ColorStateList.valueOf(context.getColor(R.color.grey_700)));

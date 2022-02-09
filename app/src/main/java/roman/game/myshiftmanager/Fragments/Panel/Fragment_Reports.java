@@ -1,6 +1,7 @@
 package roman.game.myshiftmanager.Fragments.Panel;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +76,7 @@ public class Fragment_Reports extends Fragment {
         ArrayList<Shift> shifts = new ArrayList<>();
         Date d = Calendar.getInstance().getTime();
         Workplace w = new Workplace(Workplace.GREEN, "text work place", 10);
+
         Shift s1 = new Shift(d, d, w);
         Shift s2 = new Shift(d, d, w);
         Shift s3 = new Shift(d, d, w);

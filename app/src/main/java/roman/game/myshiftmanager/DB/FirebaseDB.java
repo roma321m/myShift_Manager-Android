@@ -1,6 +1,8 @@
 package roman.game.myshiftmanager.DB;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -8,7 +10,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -16,23 +17,18 @@ import roman.game.myshiftmanager.Objects.User;
 
 public class FirebaseDB {
 
-    public interface Callback_splashCheck {
-        void profileExist(String userID);
-
+    public interface Callback_checkUserExistence {
+        void profileExist();
         void makeProfile();
     }
 
     private FirebaseDatabase database;
-    private DatabaseReference usersRef;
-    private DatabaseReference phonesRef;
     private static FirebaseDB single_instance;
 
-    private Callback_splashCheck callback_splashCheck;
+    private Callback_checkUserExistence callback_checkUserExistence;
 
     private FirebaseDB() {
         database = FirebaseDatabase.getInstance();
-        usersRef = database.getReference("Users");
-        phonesRef = database.getReference("PhoneLogins");
     }
 
     public static FirebaseDB getInstance() {
@@ -42,14 +38,14 @@ public class FirebaseDB {
         return single_instance;
     }
 
-    public FirebaseDB setCallback_splashCheck(Callback_splashCheck callback_splashCheck) {
-        this.callback_splashCheck = callback_splashCheck;
+    public FirebaseDB setCallback_checkUserExistence(Callback_checkUserExistence callback_checkUserExistence) {
+        this.callback_checkUserExistence = callback_checkUserExistence;
         return this;
     }
 
     public void createUser(User user) {
         if (user != null && user.getUserID() != null) {
-            usersRef.child(user.getUserID()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            database.getReference("Users").child(user.getUserID()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     Log.d("pttt", "data added to firebase");
@@ -58,28 +54,34 @@ public class FirebaseDB {
         }
     }
 
+    public void text(Context context){
+        database.getReference("Users").child("id").setValue("user").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(context, "text", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     public void hasProfile(String userID) {
-        // FIXME: 07/02/2022 - not working 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("tfff", "1");
-                if (!dataSnapshot.exists()) {
-                    Log.d("tfff", "2");
-                    callback_splashCheck.makeProfile();
-                } else {
-                    Log.d("tfff", "2");
-                    callback_splashCheck.profileExist(userID);
+                if(!dataSnapshot.exists()) {
+                    callback_checkUserExistence.makeProfile();
+                }else{
+                    callback_checkUserExistence.profileExist();
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d("tfff", databaseError.getMessage());
+            public void onCancelled(DatabaseError error) {
+                Log.d("tfff",error.getMessage());
             }
         };
-        usersRef.child(userID).addListenerForSingleValueEvent(eventListener);
-
+        database.getReference("Users").child(userID).addListenerForSingleValueEvent(eventListener);
     }
 }
 

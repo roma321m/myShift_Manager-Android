@@ -44,7 +44,7 @@ public class DateTimeDialogManager {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String time = "  " + hourOfDay + ":" + minute;
                         textInputEditText.setText(textInputEditText.getText() + time);
-                        // TODO: 09/02/2022 - callback when the data ready with it for the activity that is using this. 
+                        // TODO: 09/02/2022 - callback when the data ready with it for the activity that is using this.
                     }
                 },0,0,true);
                 timePickerDialog.show();

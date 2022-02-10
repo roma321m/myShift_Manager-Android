@@ -9,10 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import roman.game.myshiftmanager.DB.FirebaseDB;
 import roman.game.myshiftmanager.Fragments.Login.Fragment_Login;
 import roman.game.myshiftmanager.Fragments.Login.Fragment_PhoneNumber;
 import roman.game.myshiftmanager.Fragments.Login.Fragment_PhoneNumberVerification;
 import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
+import roman.game.myshiftmanager.Managers.UserDataManager;
 import roman.game.myshiftmanager.R;
 
 public class Activity_Login extends AppCompatActivity {
@@ -24,7 +26,7 @@ public class Activity_Login extends AppCompatActivity {
     private Fragment_PhoneNumber fragment_phone;
     private Fragment_PhoneNumberVerification fragment_phoneNumberVerification;
 
-    private FirebaseAuthManager firebaseAuthManager;
+    private UserDataManager userDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,11 @@ public class Activity_Login extends AppCompatActivity {
         setFragments();
         replaceFragments(fragment_login);
 
-        firebaseAuthManager = FirebaseAuthManager.getInstance();
-        firebaseAuthManager.setActivity(this);
-        firebaseAuthManager.setCallback_moveToVerification(callback_moveToVerification);
-        firebaseAuthManager.setCallback_moveToProfile(callback_moveToProfile);
+        userDataManager = UserDataManager.getInstance();
+        userDataManager.setLoginActivity(this);
+        userDataManager.setCallback_moveToVerification(callback_moveToVerification);
+        userDataManager.setCallback_moveToMakeProfile(callback_moveToMakeProfile);
+        userDataManager.setCallback_checkUserExistence(callback_checkUserExistence);
     }
 
     private void replaceFragments(Fragment fragment){
@@ -76,7 +79,7 @@ public class Activity_Login extends AppCompatActivity {
 
         @Override
         public void loginClicked(String number) {
-            firebaseAuthManager.phoneNumberEntered(number);
+            userDataManager.phoneNumberEntered(number);
         }
     };
 
@@ -88,13 +91,12 @@ public class Activity_Login extends AppCompatActivity {
 
         @Override
         public void verifiedClicked(String code){
-            firebaseAuthManager.codeEntered(code);
+            userDataManager.codeEntered(code);
         }
 
         @Override
-        public void resendClicked() {
-            // FIXME: 06/02/2022 - no phone number in the verification fragment
-            //firebaseAuthManager.resendEntered(String number);
+        public void resendClicked(String number) {
+            userDataManager.resendEntered(number);
         }
     };
 
@@ -105,13 +107,30 @@ public class Activity_Login extends AppCompatActivity {
         }
     };
 
-    FirebaseAuthManager.Callback_MoveToProfile callback_moveToProfile = new FirebaseAuthManager.Callback_MoveToProfile() {
+    FirebaseAuthManager.Callback_MoveToMakeProfile callback_moveToMakeProfile = new FirebaseAuthManager.Callback_MoveToMakeProfile() {
         @Override
-        public void moveToProfile() {
-            Intent intent = new Intent(Activity_Login.this, Activity_Panel.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent);
-            finish();
+        public void moveToMakeProfile() {
+            // FIXME: 10/02/2022 - need check if the user already exists
+            userDataManager.checkIfHasProfile();
+        }
+    };
+
+    private void openActivity(Class activity) {
+        Intent intent = new Intent(this, activity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
+    }
+
+    FirebaseDB.Callback_checkUserExistence callback_checkUserExistence = new FirebaseDB.Callback_checkUserExistence() {
+        @Override
+        public void profileExist() {
+            openActivity(Activity_Panel.class);
+        }
+
+        @Override
+        public void makeProfile() {
+            openActivity(Activity_MakeProfile.class);
         }
     };
 }

@@ -1,7 +1,6 @@
 package roman.game.myshiftmanager.Managers;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
@@ -26,8 +25,8 @@ public class FirebaseAuthManager {
         void moveToVerificationFragment();
     }
 
-    public interface Callback_MoveToProfile{
-        void moveToProfile();
+    public interface Callback_MoveToMakeProfile {
+        void moveToMakeProfile();
     }
 
     private Context context;
@@ -38,7 +37,7 @@ public class FirebaseAuthManager {
     private FirebaseAuth firebaseAuth;
 
     private Callback_MoveToVerification callback_moveToVerification;
-    private Callback_MoveToProfile callback_moveToProfile;
+    private Callback_MoveToMakeProfile callback_moveToMakeProfile;
 
     private static FirebaseAuthManager single_instance;
 
@@ -95,8 +94,8 @@ public class FirebaseAuthManager {
         return this;
     }
 
-    public FirebaseAuthManager setCallback_moveToProfile(Callback_MoveToProfile callback_moveToProfile) {
-        this.callback_moveToProfile = callback_moveToProfile;
+    public FirebaseAuthManager setCallback_moveToMakeProfile(Callback_MoveToMakeProfile callback_moveToMakeProfile) {
+        this.callback_moveToMakeProfile = callback_moveToMakeProfile;
         return this;
     }
 
@@ -167,8 +166,8 @@ public class FirebaseAuthManager {
                         // successfully signed in
                         String number = firebaseAuth.getCurrentUser().getPhoneNumber();
                         Toast.makeText(context, "Logging in as " + number, Toast.LENGTH_SHORT).show();
-                        if(callback_moveToProfile != null)
-                            callback_moveToProfile.moveToProfile();
+                        if(callback_moveToMakeProfile != null)
+                            callback_moveToMakeProfile.moveToMakeProfile();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -178,5 +177,9 @@ public class FirebaseAuthManager {
                         Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public void signOut() {
+        firebaseAuth.signOut();
     }
 }

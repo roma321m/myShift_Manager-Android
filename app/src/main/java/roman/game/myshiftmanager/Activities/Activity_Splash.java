@@ -11,35 +11,26 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseUser;
-
 import roman.game.myshiftmanager.DB.FirebaseDB;
-import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
+import roman.game.myshiftmanager.Managers.UserDataManager;
 import roman.game.myshiftmanager.R;
 
 public class Activity_Splash extends AppCompatActivity {
 
-    private static final String TAG = Activity_Splash.class.getSimpleName();
-
-    final int ANIM_DURATION = 4400;
-
+    private final int ANIM_DURATION = 4400;
     private ImageView splash_IMG_logo;
 
-    FirebaseAuthManager firebaseAuthManager;
-    FirebaseDB firebaseDB;
+    UserDataManager userDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Remove notification bar
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
         findViews();
 
-        firebaseAuthManager = FirebaseAuthManager.getInstance();
-        firebaseDB = FirebaseDB.getInstance();
-        firebaseDB.setCallback_splashCheck(callback_splashCheck);
+        userDataManager = UserDataManager.getInstance();
+        userDataManager.setCallback_checkUserExistence(callback_checkUserExistence);
 
         splash_IMG_logo.setVisibility(View.INVISIBLE);
 
@@ -85,14 +76,11 @@ public class Activity_Splash extends AppCompatActivity {
     }
 
     private void animationDone() {
-        FirebaseUser user = firebaseAuthManager.getUser();
-        if(user != null){
-            // FIXME: 07/02/2022 firebaseDB.hasProfile(user.getUid());
-            //temp
-            Toast.makeText(this, ""+user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
-            openActivity(Activity_Panel.class);
-            //
+        if(userDataManager.checkIfHasUID()){
+            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+            userDataManager.checkIfHasProfile();
         }else{
+            Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
             openActivity(Activity_Login.class);
         }
     }
@@ -104,14 +92,9 @@ public class Activity_Splash extends AppCompatActivity {
         finish();
     }
 
-    private void findViews() {
-        splash_IMG_logo = findViewById(R.id.splash_IMG_logo);
-    }
-
-    FirebaseDB.Callback_splashCheck callback_splashCheck = new FirebaseDB.Callback_splashCheck() {
+    FirebaseDB.Callback_checkUserExistence callback_checkUserExistence = new FirebaseDB.Callback_checkUserExistence() {
         @Override
-        public void profileExist(String userID) {
-            Toast.makeText(Activity_Splash.this, ""+userID, Toast.LENGTH_SHORT).show();
+        public void profileExist() {
             openActivity(Activity_Panel.class);
         }
 
@@ -120,4 +103,8 @@ public class Activity_Splash extends AppCompatActivity {
             openActivity(Activity_MakeProfile.class);
         }
     };
+
+    private void findViews() {
+        splash_IMG_logo = findViewById(R.id.splash_IMG_logo);
+    }
 }

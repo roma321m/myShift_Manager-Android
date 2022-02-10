@@ -22,7 +22,7 @@ public class Fragment_PhoneNumberVerification extends Fragment {
     public interface CallBack_PhoneNumberVerification {
         void backClicked();
         void verifiedClicked(String code);
-        void resendClicked();
+        void resendClicked(String number);
     }
 
     private CallBack_PhoneNumberVerification callBack_phoneNumberVerification;
@@ -86,7 +86,8 @@ public class Fragment_PhoneNumberVerification extends Fragment {
             @Override
             public void onClick(View v) {
                 if(callBack_phoneNumberVerification != null){
-                    callBack_phoneNumberVerification.resendClicked();
+                    // FIXME: 10/02/2022 - get from the intent the phone number and pass it to the verification fragment
+                    callBack_phoneNumberVerification.resendClicked("");
                 }
             }
         });

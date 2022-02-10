@@ -14,8 +14,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
+import roman.game.myshiftmanager.Activities.Activity_Login;
 import roman.game.myshiftmanager.Activities.Activity_MakeShift;
 import roman.game.myshiftmanager.Activities.Activity_MakeWorkplace;
+import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
 import roman.game.myshiftmanager.R;
 
 public class Fragment_Profile extends Fragment {
@@ -25,6 +27,8 @@ public class Fragment_Profile extends Fragment {
     private MaterialButton profile_BTN_add_workplace, profile_BTN_add_shift, profile_BTN_logout;
     private ShapeableImageView profile_IMG_pic;
     private MaterialTextView profile_LBL_first_name, profile_LBL_last_name, profile_LBL_email, profile_LBL_currency;
+
+    private FirebaseAuthManager firebaseAuthManager;
 
     public Fragment_Profile() {
     }
@@ -40,6 +44,8 @@ public class Fragment_Profile extends Fragment {
         findViews(view);
 
         setData();
+
+        firebaseAuthManager = FirebaseAuthManager.getInstance();
 
         profile_BTN_add_workplace.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,12 +65,17 @@ public class Fragment_Profile extends Fragment {
         profile_BTN_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 08/02/2022 - log out the user
-                Toast.makeText(activity, "clicked", Toast.LENGTH_SHORT).show();
+                signOut();
             }
         });
 
         return view;
+    }
+
+    private void signOut(){
+        firebaseAuthManager.signOut();
+        openActivity(Activity_Login.class);
+        activity.finish();
     }
 
     private void setData() {

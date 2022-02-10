@@ -1,4 +1,4 @@
-package roman.game.myshiftmanager.Managers;
+package roman.game.myshiftmanager.UserData;
 
 import android.app.Activity;
 import android.content.Context;

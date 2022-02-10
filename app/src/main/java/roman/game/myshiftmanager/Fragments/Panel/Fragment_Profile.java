@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -17,7 +16,8 @@ import com.google.android.material.textview.MaterialTextView;
 import roman.game.myshiftmanager.Activities.Activity_Login;
 import roman.game.myshiftmanager.Activities.Activity_MakeShift;
 import roman.game.myshiftmanager.Activities.Activity_MakeWorkplace;
-import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
+import roman.game.myshiftmanager.UserData.UserDataManager;
+import roman.game.myshiftmanager.Objects.User;
 import roman.game.myshiftmanager.R;
 
 public class Fragment_Profile extends Fragment {
@@ -28,7 +28,7 @@ public class Fragment_Profile extends Fragment {
     private ShapeableImageView profile_IMG_pic;
     private MaterialTextView profile_LBL_first_name, profile_LBL_last_name, profile_LBL_email, profile_LBL_currency;
 
-    private FirebaseAuthManager firebaseAuthManager;
+    private UserDataManager userDataManager;
 
     public Fragment_Profile() {
     }
@@ -41,11 +41,11 @@ public class Fragment_Profile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
         findViews(view);
 
+        userDataManager = UserDataManager.getInstance();
         setData();
-
-        firebaseAuthManager = FirebaseAuthManager.getInstance();
 
         profile_BTN_add_workplace.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,13 +73,21 @@ public class Fragment_Profile extends Fragment {
     }
 
     private void signOut(){
-        firebaseAuthManager.signOut();
+        userDataManager.signOut();
         openActivity(Activity_Login.class);
         activity.finish();
     }
 
     private void setData() {
-        // TODO: 08/02/2022 - set all the texts and picture with the user data from db
+        User user = userDataManager.getMyUser();
+        profile_LBL_first_name.setText(user.getFirstName());
+        profile_LBL_last_name.setText(user.getLastName());
+        profile_LBL_email.setText(user.getEmail());
+        String[] currency = getResources().getStringArray(R.array.currency);
+        if(user.getCurrency() < currency.length)
+            profile_LBL_currency.setText(currency[user.getCurrency()]);
+        else
+            profile_LBL_currency.setText(currency[0]);
     }
 
     private void openActivity(Class activity) {

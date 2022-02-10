@@ -14,9 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import roman.game.myshiftmanager.Activities.Activity_MakeWorkplace;
+import roman.game.myshiftmanager.Objects.User;
 import roman.game.myshiftmanager.R;
+import roman.game.myshiftmanager.UserData.UserDataManager;
 
 public class Fragment_Settings extends Fragment {
 
@@ -25,7 +28,11 @@ public class Fragment_Settings extends Fragment {
     private AutoCompleteTextView settings_autoCompleteTextView_currency;
     private AutoCompleteTextView settings_autoCompleteTextView_time;
     private AutoCompleteTextView settings_autoCompleteTextView_date;
-    private MaterialButton settings_BTN_add, settings_BTN_currency, settings_BTN_time, settings_BTN_date;
+    private TextInputEditText settings_textInputEditText_workplaces;
+    private MaterialButton settings_BTN_save;
+
+    private UserDataManager userDataManager;
+    private int currency, dateFormat, timeFormat;
 
     public Fragment_Settings() {
     }
@@ -47,65 +54,65 @@ public class Fragment_Settings extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         findViews(view);
-
         setDropdown();
 
-        settings_BTN_add.setOnClickListener(new View.OnClickListener() {
+        userDataManager = UserDataManager.getInstance();
+        setData();
+        setOnStartSelected();
+
+        settings_textInputEditText_workplaces.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: 10/02/2022 - if has workplaces, make a popup to select one of them / make new,
+                // if not, open make new workplace activity
                 openActivity(Activity_MakeWorkplace.class);
             }
         });
-
-        settings_BTN_currency.setOnClickListener(new View.OnClickListener() {
+        
+        settings_BTN_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 08/02/2022 - save the changes to db
-                Toast.makeText(activity, "clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        settings_BTN_time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 08/02/2022 - save the changes to db
-                Toast.makeText(activity, "clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        settings_BTN_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 08/02/2022 - save the changes to db
-                Toast.makeText(activity, "clicked", Toast.LENGTH_SHORT).show();
+                // TODO: 10/02/2022 - check if one of the setting different from the user data, if so, update user data and db... 
             }
         });
 
         settings_autoCompleteTextView_currency.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO: 08/02/2022 - open save button
-                Toast.makeText(activity, "item" + position, Toast.LENGTH_SHORT).show();
+                currency = position;
             }
         });
 
         settings_autoCompleteTextView_time.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO: 08/02/2022 - open save button
-                Toast.makeText(activity, "item" + position, Toast.LENGTH_SHORT).show();
+                timeFormat = position;
             }
         });
 
         settings_autoCompleteTextView_date.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO: 08/02/2022 - open save button
-                Toast.makeText(activity, "item" + position, Toast.LENGTH_SHORT).show();
+                dateFormat = position;
             }
         });
 
         return view;
+    }
+
+    private void setOnStartSelected() {
+        // FIXME: 10/02/2022 - not working...
+        /*
+        settings_autoCompleteTextView_currency.setSelection(currency);
+        settings_autoCompleteTextView_time.setSelection(timeFormat);
+        settings_autoCompleteTextView_date.setSelection(dateFormat);*/
+    }
+
+    private void setData() {
+        User user = userDataManager.getMyUser();
+        currency = user.getCurrency();
+        dateFormat = user.getDateFormat();
+        timeFormat = user.getTimeFormat();
     }
 
     private void openActivity(Class activity) {
@@ -129,12 +136,10 @@ public class Fragment_Settings extends Fragment {
     }
 
     private void findViews(View view) {
-        settings_BTN_add = view.findViewById(R.id.settings_BTN_add);
-        settings_BTN_currency = view.findViewById(R.id.settings_BTN_currency);
-        settings_BTN_time = view.findViewById(R.id.settings_BTN_time);
-        settings_BTN_date = view.findViewById(R.id.settings_BTN_date);
+        settings_textInputEditText_workplaces = view.findViewById(R.id.settings_textInputEditText_workplaces);
         settings_autoCompleteTextView_currency = view.findViewById(R.id.settings_autoCompleteTextView_currency);
         settings_autoCompleteTextView_time = view.findViewById(R.id.settings_autoCompleteTextView_time);
         settings_autoCompleteTextView_date = view.findViewById(R.id.settings_autoCompleteTextView_date);
+        settings_BTN_save = view.findViewById(R.id.settings_BTN_save);
     }
 }

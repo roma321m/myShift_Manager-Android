@@ -2,12 +2,10 @@ package roman.game.myshiftmanager;
 
 import android.app.Application;
 
-import roman.game.myshiftmanager.DB.MSP;
+import roman.game.myshiftmanager.UserData.MSP;
 import roman.game.myshiftmanager.Managers.BottomMenuManager;
-import roman.game.myshiftmanager.Managers.DateTimeDialogManager;
-import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
-import roman.game.myshiftmanager.Managers.ReportsMonthManager;
-import roman.game.myshiftmanager.Managers.UserDataManager;
+import roman.game.myshiftmanager.UserData.FirebaseAuthManager;
+import roman.game.myshiftmanager.UserData.UserDataManager;
 import roman.game.myshiftmanager.Managers.VibrationSensorManager;
 
 public class App extends Application {

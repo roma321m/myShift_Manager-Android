@@ -9,10 +9,9 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import roman.game.myshiftmanager.DB.FirebaseDB;
-import roman.game.myshiftmanager.Managers.UserDataManager;
+import roman.game.myshiftmanager.UserData.FirebaseDB;
+import roman.game.myshiftmanager.UserData.UserDataManager;
 import roman.game.myshiftmanager.R;
 
 public class Activity_Splash extends AppCompatActivity {
@@ -77,10 +76,8 @@ public class Activity_Splash extends AppCompatActivity {
 
     private void animationDone() {
         if(userDataManager.checkIfHasUID()){
-            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
             userDataManager.checkIfHasProfile();
         }else{
-            Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
             openActivity(Activity_Login.class);
         }
     }

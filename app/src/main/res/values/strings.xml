@@ -28,15 +28,17 @@
     <string name="phone_verification_resend_text">Did not get OTP? <b>Resend</b></string>
     <!-- make profile -->
     <string name="make_first_name">First Name</string>
+    <string name="make_title">Welcome, let\'s make new account</string>
     <string name="make_last_name">Last Name</string>
     <string name="make_email">Email</string>
-    <string name="make_currency">Choose currency</string>
+    <string name="make_currency">Select currency</string>
     <string name="make_register">Register</string>
     <!-- settings -->
-    <string name="settings_currency">Currency</string>
-    <string name="settings_time">Time format</string>
-    <string name="settings_date">Date format</string>
-    <string name="settings_add_workplace">Add workplace</string>
+    <string name="settings_currency">Select Currency</string>
+    <string name="settings_time">Select Time format</string>
+    <string name="settings_date">Select Date format</string>
+    <string name="settings_add_workplace">Workplaces</string>
+    <string name="settings_save">Save</string>
     <!-- profile -->
     <string name="profile_first_name"> <b>First Name:</b></string>
     <string name="profile_last_name"> <b>Last Name:</b></string>

@@ -9,12 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
-import roman.game.myshiftmanager.DB.FirebaseDB;
+import roman.game.myshiftmanager.UserData.FirebaseDB;
 import roman.game.myshiftmanager.Fragments.Login.Fragment_Login;
 import roman.game.myshiftmanager.Fragments.Login.Fragment_PhoneNumber;
 import roman.game.myshiftmanager.Fragments.Login.Fragment_PhoneNumberVerification;
-import roman.game.myshiftmanager.Managers.FirebaseAuthManager;
-import roman.game.myshiftmanager.Managers.UserDataManager;
+import roman.game.myshiftmanager.UserData.FirebaseAuthManager;
+import roman.game.myshiftmanager.UserData.UserDataManager;
 import roman.game.myshiftmanager.R;
 
 public class Activity_Login extends AppCompatActivity {
@@ -110,7 +110,6 @@ public class Activity_Login extends AppCompatActivity {
     FirebaseAuthManager.Callback_MoveToMakeProfile callback_moveToMakeProfile = new FirebaseAuthManager.Callback_MoveToMakeProfile() {
         @Override
         public void moveToMakeProfile() {
-            // FIXME: 10/02/2022 - need check if the user already exists
             userDataManager.checkIfHasProfile();
         }
     };

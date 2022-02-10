@@ -1,18 +1,16 @@
 package roman.game.myshiftmanager.Objects;
 
-import java.util.ArrayList;
-
 public class User {
+
     private String worksID;
     private String shiftsID;
-    private String userID;
-
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
-    private ArrayList<Workplace> works;
-    private ArrayList<Shift> shifts;
+    private int currency;
+    private int timeFormat;
+    private int dateFormat;
 
     public User(){}
 
@@ -52,15 +50,6 @@ public class User {
         return this;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public User setUserID(String userID) {
-        this.userID = userID;
-        return this;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -79,21 +68,31 @@ public class User {
         return this;
     }
 
-    public ArrayList<Workplace> getWorks() {
-        return works;
+    public int getCurrency() {
+        return currency;
     }
 
-    public User setWorks(ArrayList<Workplace> works) {
-        this.works = works;
+    public User setCurrency(int currency) {
+        this.currency = currency;
         return this;
     }
 
-    public ArrayList<Shift> getShifts() {
-        return shifts;
+
+    public int getTimeFormat() {
+        return timeFormat;
     }
 
-    public User setShifts(ArrayList<Shift> shifts) {
-        this.shifts = shifts;
+    public User setTimeFormat(int timeFormat) {
+        this.timeFormat = timeFormat;
+        return this;
+    }
+
+    public int getDateFormat() {
+        return dateFormat;
+    }
+
+    public User setDateFormat(int dateFormat) {
+        this.dateFormat = dateFormat;
         return this;
     }
 }

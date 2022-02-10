@@ -1,4 +1,4 @@
-package roman.game.myshiftmanager.DB;
+package roman.game.myshiftmanager.UserData;
 
 import android.content.Context;
 import android.content.SharedPreferences;

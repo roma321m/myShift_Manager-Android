@@ -1,6 +1,8 @@
 package roman.game.myshiftmanager.Objects;
 
-public class Workplace {
+import java.io.Serializable;
+
+public class Workplace implements Serializable {
 
     private String name;
     private int color, breakTimeUnpaid;

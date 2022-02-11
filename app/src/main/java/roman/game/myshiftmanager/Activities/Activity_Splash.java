@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import roman.game.myshiftmanager.UserData.FirebaseDB;
 import roman.game.myshiftmanager.UserData.UserDataManager;
@@ -18,6 +19,7 @@ public class Activity_Splash extends AppCompatActivity {
 
     private final int ANIM_DURATION = 4400;
     private ImageView splash_IMG_logo;
+    private ProgressBar splash_PB;
 
     UserDataManager userDataManager;
 
@@ -75,6 +77,7 @@ public class Activity_Splash extends AppCompatActivity {
     }
 
     private void animationDone() {
+        splash_PB.setVisibility(View.VISIBLE);
         if(userDataManager.checkIfHasUID()){
             userDataManager.checkIfHasProfile();
         }else{
@@ -103,5 +106,6 @@ public class Activity_Splash extends AppCompatActivity {
 
     private void findViews() {
         splash_IMG_logo = findViewById(R.id.splash_IMG_logo);
+        splash_PB = findViewById(R.id.splash_PB);
     }
 }

@@ -162,4 +162,12 @@ public class UserDataManager {
             shifts = shifts1;
         }
     };
+
+    public ArrayList<Workplace> getWorkplaces() {
+        return workplaces;
+    }
+
+    public ArrayList<Shift> getShifts() {
+        return shifts;
+    }
 }

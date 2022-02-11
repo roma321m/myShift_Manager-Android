@@ -202,6 +202,7 @@
                     android:layout_below="@+id/shift_LBL_total_time"
                     android:layout_gravity="center"
                     android:backgroundTint="#E7E7E7"
+                    android:visibility="gone"
                     android:layout_marginTop="50dp">
 
                     <LinearLayout

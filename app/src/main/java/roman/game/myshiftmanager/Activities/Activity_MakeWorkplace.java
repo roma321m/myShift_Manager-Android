@@ -3,12 +3,15 @@ package roman.game.myshiftmanager.Activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
+
+import roman.game.myshiftmanager.Objects.Workplace;
 import roman.game.myshiftmanager.R;
 import roman.game.myshiftmanager.UserData.UserDataManager;
 
@@ -22,14 +25,29 @@ public class Activity_MakeWorkplace extends AppCompatActivity {
     private ShapeableImageView workplace_IMG_blue, workplace_IMG_green, workplace_IMG_red, workplace_IMG_purple;
 
     private UserDataManager userDataManager;
+    private boolean newWorkplace;
+    private Workplace workplace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_workplace);
 
+        newWorkplace = true;
+
+        try {
+            workplace = (Workplace) getIntent().getSerializableExtra("workplace");
+            if(workplace != null)
+                newWorkplace = false;
+        } catch (Exception e){
+        }
+
         findViews();
         userDataManager = UserDataManager.getInstance();
+
+        if (!newWorkplace){
+            setWorkplaceData();
+        }
         
         workplace_BTN_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,14 +63,15 @@ public class Activity_MakeWorkplace extends AppCompatActivity {
             }
         });
 
-        // TODO: 09/02/2022 - edt input 
-
         // TODO: 09/02/2022 - radio group for picking color 
+    }
+
+    private void setWorkplaceData() {
+        // TODO: 11/02/2022 - set all the fields based on what's in the data.
     }
 
     private void makeNewWorkplace(){
         String name = workplace_textInputEditText_name.getText().toString().trim();
-        // TODO: 11/02/2022 - can improve the checks on tf if has time later on...
         if (name.isEmpty()) {
             workplace_textInputEditText_name.setError("Required field");
             workplace_textInputEditText_name.requestFocus();

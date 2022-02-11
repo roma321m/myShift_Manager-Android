@@ -74,6 +74,10 @@
     <string name="shift_remove">Remove this shift</string>
     <string name="shift_create">Create</string>
 
+    <!-- dialog workplace -->
+    <string name="dialog_workplaces_title"> <b>Select Workplace:</b></string>
+    <string name="dialog_workplaces_add"> <b>Add New workplace</b></string>
+
     <!-- shift_item -->
     <string name="shift_item_title_workplace"> <b>Workplace:</b></string>
     <string name="shift_item_title_start"> <b>Shift started:</b></string>

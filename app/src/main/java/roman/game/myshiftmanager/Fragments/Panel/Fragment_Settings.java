@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -16,8 +15,12 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+
 import roman.game.myshiftmanager.Activities.Activity_MakeWorkplace;
+import roman.game.myshiftmanager.Dialog.ViewDialog_Workplaces;
 import roman.game.myshiftmanager.Objects.User;
+import roman.game.myshiftmanager.Objects.Workplace;
 import roman.game.myshiftmanager.R;
 import roman.game.myshiftmanager.UserData.UserDataManager;
 
@@ -33,6 +36,11 @@ public class Fragment_Settings extends Fragment {
 
     private UserDataManager userDataManager;
     private int currency, dateFormat, timeFormat;
+
+    public interface Callback_ViewDialogWorkplaces {
+        void workplaceSelected(int pos);
+        void newWorkplaceSelected();
+    }
 
     public Fragment_Settings() {
     }
@@ -63,9 +71,12 @@ public class Fragment_Settings extends Fragment {
         settings_textInputEditText_workplaces.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 10/02/2022 - if has workplaces, make a popup to select one of them / make new,
-                // if not, open make new workplace activity
-                openActivity(Activity_MakeWorkplace.class);
+                if (userDataManager.getWorkplaces().size() > 0) {
+                    ViewDialog_Workplaces dialog = new ViewDialog_Workplaces();
+                    dialog.showDialog(activity, userDataManager.getWorkplaces(), callback_viewDialogWorkplaces);
+                } else {
+                    openActivity(Activity_MakeWorkplace.class);
+                }
             }
         });
         
@@ -134,6 +145,22 @@ public class Fragment_Settings extends Fragment {
         ArrayAdapter arrayAdapterDate = new ArrayAdapter(activity, R.layout.dropdown_item, date);
         settings_autoCompleteTextView_date.setAdapter(arrayAdapterDate);
     }
+
+    Callback_ViewDialogWorkplaces callback_viewDialogWorkplaces = new Callback_ViewDialogWorkplaces() {
+        @Override
+        public void workplaceSelected(int pos) {
+            Workplace workplace = userDataManager.getWorkplaces().get(pos);
+            Intent intent = new Intent(activity, Activity_MakeWorkplace.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.putExtra("workplace", workplace);
+            startActivity(intent);
+        }
+
+        @Override
+        public void newWorkplaceSelected() {
+            openActivity(Activity_MakeWorkplace.class);
+        }
+    };
 
     private void findViews(View view) {
         settings_textInputEditText_workplaces = view.findViewById(R.id.settings_textInputEditText_workplaces);

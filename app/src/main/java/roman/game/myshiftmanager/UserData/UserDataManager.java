@@ -39,34 +39,32 @@ public class UserDataManager {
         return single_instance;
     }
 
-    public User getMyUser(){
+    public User getMyUser() {
         return myUser;
     }
 
-    public void setMyUser(String firstName, String lastName, String email, int currency){
+    public void setMyUser(String firstName, String lastName, String email, int currency) {
         workplaces = new ArrayList<>();
         shifts = new ArrayList<>();
         myUser = new User();
         myUser.setPhoneNumber(firebaseAuthManager.getUser().getPhoneNumber());
-        if (firstName != null){
+        if (firstName != null) {
             myUser.setFirstName(firstName);
         }
-        if (lastName != null){
+        if (lastName != null) {
             myUser.setLastName(lastName);
         }
-        if (email != null){
+        if (email != null) {
             myUser.setEmail(email);
         }
         myUser.setCurrency(currency);
         myUser.setTimeFormat(0);
         myUser.setDateFormat(0);
         String uid = firebaseAuthManager.getUser().getUid();
-        myUser.setShiftsID(uid + "_shifts");
-        myUser.setWorksID(uid + "_works");
         firebaseDB.createUser(uid, myUser);
     }
 
-    public void setLoginActivity(Activity activity){
+    public void setLoginActivity(Activity activity) {
         firebaseAuthManager.setActivity(activity);
     }
 
@@ -94,11 +92,11 @@ public class UserDataManager {
         firebaseAuthManager.resendEntered(number);
     }
 
-    public boolean checkIfHasUID(){
+    public boolean checkIfHasUID() {
         return firebaseAuthManager.getUser() != null;
     }
 
-    public void checkIfHasProfile(){
+    public void checkIfHasProfile() {
         String uid = firebaseAuthManager.getUser().getUid();
         firebaseDB.hasProfile(uid);
     }
@@ -107,26 +105,49 @@ public class UserDataManager {
         firebaseAuthManager.signOut();
     }
 
-    public void addShift(){
+    public void addShift() {
         Shift shift = new Shift();
 
         // TODO: 10/02/2022 create new shift and add it to the user
 
-        firebaseDB.addShift(firebaseAuthManager.getUser().getUid(), shift);
+        shifts.add(shift);
+        int shiftId = shifts.size();
+
+        firebaseDB.addShift(firebaseAuthManager.getUser().getUid(), shiftId, shift);
     }
 
-    public void addWorkplace(){
+    public void addWorkplace(String name, String hourlyWage, String vacationPayments,
+                             String deductionPerShift, String bonusesPerShift,
+                             String breakPerShiftUnpaid, String dailyTravelExpenses,
+                             String monthlyTravelExpenses, int color) {
         Workplace workplace = new Workplace();
+        workplace.setName(name);
+        workplace.setColor(color);
+        if (!hourlyWage.equals(""))
+            workplace.setHourlyWage(Double.parseDouble(hourlyWage));
+        if (!vacationPayments.equals(""))
+            workplace.setVacationPayments(Double.parseDouble(vacationPayments));
+        if (!deductionPerShift.equals(""))
+            workplace.setDeductionPerShift(Double.parseDouble(deductionPerShift));
+        if (!bonusesPerShift.equals(""))
+            workplace.setBonusesPerShift(Double.parseDouble(bonusesPerShift));
+        if (!breakPerShiftUnpaid.equals(""))
+            workplace.setBreakTimeUnpaid(Integer.parseInt(breakPerShiftUnpaid));
+        if (!dailyTravelExpenses.equals(""))
+            workplace.setDailyTravelExpenses(Double.parseDouble(dailyTravelExpenses));
+        if (!monthlyTravelExpenses.equals(""))
+            workplace.setMonthlyTravelExpenses(Double.parseDouble(monthlyTravelExpenses));
 
-        // TODO: 10/02/2022 create new workplace and add it to the user
+        workplaces.add(workplace);
+        int workId = workplaces.size();
 
-        firebaseDB.addWorkplace(firebaseAuthManager.getUser().getUid(), workplace);
+        firebaseDB.addWorkplace(firebaseAuthManager.getUser().getUid(), workId, workplace);
     }
 
     FirebaseDB.Callback_loadUserData callback_loadUserData = new FirebaseDB.Callback_loadUserData() {
         @Override
         public void callback_loadUserData(User user) {
-            if (user != null){
+            if (user != null) {
                 myUser = user;
             }
         }

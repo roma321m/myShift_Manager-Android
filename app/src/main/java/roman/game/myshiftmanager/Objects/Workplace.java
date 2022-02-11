@@ -2,18 +2,65 @@ package roman.game.myshiftmanager.Objects;
 
 public class Workplace {
 
-    public static final String GREEN = "green", BLUE = "blue";
     private String name;
-    private String color;
-    private double hourlyWage;
+    private int color, breakTimeUnpaid;
+    private double hourlyWage, vacationPayments, deductionPerShift, bonusesPerShift, dailyTravelExpenses, monthlyTravelExpenses;
 
     public Workplace() {
     }
 
-    public Workplace(String name, String color, double hourlyWage) {
-        setColor(color);
-        setHourlyWage(hourlyWage);
-        setName(name);
+    public int getBreakTimeUnpaid() {
+        return breakTimeUnpaid;
+    }
+
+    public Workplace setBreakTimeUnpaid(int breakTimeUnpaid) {
+        this.breakTimeUnpaid = breakTimeUnpaid;
+        return this;
+    }
+
+    public double getVacationPayments() {
+        return vacationPayments;
+    }
+
+    public Workplace setVacationPayments(double vacationPayments) {
+        this.vacationPayments = vacationPayments;
+        return this;
+    }
+
+    public double getDeductionPerShift() {
+        return deductionPerShift;
+    }
+
+    public Workplace setDeductionPerShift(double deductionPerShift) {
+        this.deductionPerShift = deductionPerShift;
+        return this;
+    }
+
+    public double getBonusesPerShift() {
+        return bonusesPerShift;
+    }
+
+    public Workplace setBonusesPerShift(double bonusesPerShift) {
+        this.bonusesPerShift = bonusesPerShift;
+        return this;
+    }
+
+    public double getDailyTravelExpenses() {
+        return dailyTravelExpenses;
+    }
+
+    public Workplace setDailyTravelExpenses(double dailyTravelExpenses) {
+        this.dailyTravelExpenses = dailyTravelExpenses;
+        return this;
+    }
+
+    public double getMonthlyTravelExpenses() {
+        return monthlyTravelExpenses;
+    }
+
+    public Workplace setMonthlyTravelExpenses(double monthlyTravelExpenses) {
+        this.monthlyTravelExpenses = monthlyTravelExpenses;
+        return this;
     }
 
     public String getName() {
@@ -25,15 +72,12 @@ public class Workplace {
         return this;
     }
 
-    public String getColor() {
+    public int getColor() {
         return color;
     }
 
-    public Workplace setColor(String color) {
-        if (color.equals(GREEN) || color.equals(BLUE))
-            this.color = color;
-        else
-            this.color = BLUE;
+    public Workplace setColor(int color) {
+        this.color = color;
         return this;
     }
 
@@ -44,5 +88,20 @@ public class Workplace {
     public Workplace setHourlyWage(double hourlyWage) {
         this.hourlyWage = hourlyWage;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Workplace{" +
+                "name='" + name + '\'' +
+                ", color=" + color +
+                ", breakTimeUnpaid=" + breakTimeUnpaid +
+                ", hourlyWage=" + hourlyWage +
+                ", vacationPayments=" + vacationPayments +
+                ", deductionPerShift=" + deductionPerShift +
+                ", bonusesPerShift=" + bonusesPerShift +
+                ", dailyTravelExpenses=" + dailyTravelExpenses +
+                ", monthlyTravelExpenses=" + monthlyTravelExpenses +
+                '}';
     }
 }

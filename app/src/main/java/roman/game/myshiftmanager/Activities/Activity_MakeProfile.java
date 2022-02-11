@@ -66,7 +66,6 @@ public class Activity_MakeProfile extends AppCompatActivity {
     }
 
     private void registerUser() {
-        // TODO: 10/02/2022 - can improve the checks on tf if has time later on...
         String firstName = make_textInputEditText_firstName.getText().toString().trim();
         String lastName = make_textInputEditText_lastName.getText().toString().trim();
         String email = make_textInputEditText_email.getText().toString().trim();

@@ -2,8 +2,6 @@ package roman.game.myshiftmanager.Objects;
 
 public class User {
 
-    private String worksID;
-    private String shiftsID;
     private String firstName;
     private String lastName;
     private String email;
@@ -29,24 +27,6 @@ public class User {
 
     public User setEmail(String email) {
         this.email = email;
-        return this;
-    }
-
-    public String getWorksID() {
-        return worksID;
-    }
-
-    public User setWorksID(String worksID) {
-        this.worksID = worksID;
-        return this;
-    }
-
-    public String getShiftsID() {
-        return shiftsID;
-    }
-
-    public User setShiftsID(String shiftsID) {
-        this.shiftsID = shiftsID;
         return this;
     }
 
@@ -76,7 +56,6 @@ public class User {
         this.currency = currency;
         return this;
     }
-
 
     public int getTimeFormat() {
         return timeFormat;

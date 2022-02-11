@@ -78,7 +78,8 @@ public class Fragment_Reports extends Fragment {
 
         ArrayList<Shift> shifts = new ArrayList<>();
         Date d = Calendar.getInstance().getTime();
-        Workplace w = new Workplace(Workplace.GREEN, "text work place", 10);
+        Workplace w = new Workplace();
+        w.setName("test workplace");
 
         Shift s1 = new Shift(d, d, w);
         Shift s2 = new Shift(d, d, w);

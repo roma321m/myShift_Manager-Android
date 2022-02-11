@@ -155,7 +155,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/settings_BTN_save"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:layout_marginStart="60dp"

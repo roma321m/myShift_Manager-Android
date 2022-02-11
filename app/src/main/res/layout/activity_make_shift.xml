@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,230 +8,260 @@
     android:orientation="vertical"
     tools:context=".Activities.Activity_MakeProfile">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/shift_LBL_title"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/shift_BTN_back"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="18dp"
-        android:gravity="center"
-        android:text="@string/shift_title"
-        android:textColor="@color/red_400"
-        android:textSize="24sp" />
+        android:layout_height="match_parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/shift_BTN_back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_alpha"
-        android:gravity="center"
-        app:icon="@drawable/img_back_arrow"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconSize="36dp"
-        app:iconTint="@color/red_400" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/shift_cardView_workplace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/shift_LBL_title"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp">
-
-        <LinearLayout
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/shift_LBL_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/shift_BTN_back"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/shift_title"
+            android:textColor="@color/red_400"
+            android:textSize="24sp" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/workplace_IMG_blue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_brightness_1_24"
-                android:tint="@color/rb_blue" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/shift_BTN_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_alpha"
+            android:gravity="center"
+            app:icon="@drawable/img_back_arrow"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="36dp"
+            app:iconTint="@color/red_400" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/shift_BTN_create"
+            android:layout_below="@+id/shift_LBL_title">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.google.android.material.textview.MaterialTextView
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/shift_cardView_workplace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/shift_workplace"
+                    android:layout_below="@+id/shift_LBL_title"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/workplace_IMG_blue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_baseline_brightness_1_24"
+                            android:tint="@color/rb_blue" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/shift_workplace"
+                                android:textColor="@color/grey_700"
+                                android:textSize="16sp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/shift_LBL_workplace_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/shift_workplace_name"
+                                android:textColor="@color/grey_700"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shift_BTN_switch"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/rounded_alpha"
+                            app:icon="@drawable/ic_baseline_swap_vert_24"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp"
+                            app:iconSize="36dp"
+                            app:iconTint="@color/grey_700" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/shift_textInputLayout_from"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shift_cardView_workplace"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/shift_from"
                     android:textColor="@color/grey_700"
-                    android:textSize="16sp" />
+                    android:textColorHint="@color/grey_700"
+                    app:boxBackgroundColor="@color/white_100"
+                    app:boxStrokeColor="@color/grey_700"
+                    app:boxStrokeErrorColor="@color/red_200"
+                    app:counterTextColor="@color/grey_700"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/grey_700"
+                    app:placeholderTextColor="@color/grey_700">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/shift_textInputEditText_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textColor="@color/grey_700"
+                        android:textIsSelectable="true"
+                        app:hintTextColor="@color/grey_700" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/shift_textInputLayout_to"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shift_textInputLayout_from"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/shift_to"
+                    android:textColor="@color/grey_700"
+                    android:textColorHint="@color/grey_700"
+                    app:boxBackgroundColor="@color/white_100"
+                    app:boxStrokeColor="@color/grey_700"
+                    app:boxStrokeErrorColor="@color/red_200"
+                    app:counterTextColor="@color/grey_700"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/grey_700"
+                    app:placeholderTextColor="@color/grey_700">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/shift_textInputEditText_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textColor="@color/grey_700"
+                        android:textIsSelectable="true"
+                        app:hintTextColor="@color/grey_700" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/shift_LBL_workplace_name"
+                    android:id="@+id/shift_LBL_total_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/shift_textInputLayout_to"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center"
-                    android:text="@string/shift_workplace_name"
+                    android:text="@string/shift_total_time"
                     android:textColor="@color/grey_700"
-                    android:textSize="18sp" />
+                    android:textSize="24sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/shift_cardView_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shift_LBL_total_time"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#E7E7E7"
+                    android:layout_marginTop="50dp">
+
+                    <LinearLayout
+                        android:id="@+id/shift_layout_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/shift_LBL_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/shift_textInputLayout_to"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/shift_remove"
+                            android:textColor="@color/red_200"
+                            android:textSize="20sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shift_BTN_delete"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/rounded_alpha"
+                            app:icon="@drawable/img_delete"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp"
+                            app:iconSize="36dp"
+                            app:iconTint="@color/red_200" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/shift_BTN_switch"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/rounded_alpha"
-                app:icon="@drawable/ic_baseline_swap_vert_24"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconSize="36dp"
-                app:iconTint="@color/grey_700" />
+        </ScrollView>
 
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/shift_textInputLayout_from"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/shift_cardView_workplace"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:hint="@string/shift_from"
-        android:textColor="@color/grey_700"
-        android:textColorHint="@color/grey_700"
-        app:boxBackgroundColor="@color/white_100"
-        app:boxStrokeColor="@color/grey_700"
-        app:boxStrokeErrorColor="@color/red_200"
-        app:counterTextColor="@color/grey_700"
-        app:hintEnabled="true"
-        app:hintTextColor="@color/grey_700"
-        app:placeholderTextColor="@color/grey_700">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/shift_textInputEditText_from"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/shift_BTN_create"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:cursorVisible="false"
-            android:focusable="false"
-            android:inputType="text"
-            android:textIsSelectable="true"
-            android:textAlignment="center"
-            android:textColor="@color/grey_700"
-            app:hintTextColor="@color/grey_700" />
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="20dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/rounded_button"
+            android:text="@string/shift_create"
+            android:textAllCaps="false"
+            android:textColor="@color/white_100" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/shift_textInputLayout_to"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/shift_textInputLayout_from"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:hint="@string/shift_to"
-        android:textColor="@color/grey_700"
-        android:textColorHint="@color/grey_700"
-        app:boxBackgroundColor="@color/white_100"
-        app:boxStrokeColor="@color/grey_700"
-        app:boxStrokeErrorColor="@color/red_200"
-        app:counterTextColor="@color/grey_700"
-        app:hintEnabled="true"
-        app:hintTextColor="@color/grey_700"
-        app:placeholderTextColor="@color/grey_700">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/shift_textInputEditText_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:cursorVisible="false"
-            android:focusable="false"
-            android:inputType="text"
-            android:textIsSelectable="true"
-            android:textAlignment="center"
-            android:textColor="@color/grey_700"
-            app:hintTextColor="@color/grey_700" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/shift_LBL_total_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/shift_textInputLayout_to"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="18dp"
-        android:gravity="center"
-        android:text="@string/shift_total_time"
-        android:textColor="@color/grey_700"
-        android:textSize="28sp" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/shift_cardView_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/shift_LBL_total_time"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp">
-
-        <LinearLayout
-            android:id="@+id/shift_layout_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/shift_LBL_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/shift_textInputLayout_to"
-                android:layout_marginEnd="5dp"
-                android:text="@string/shift_remove"
-                android:textColor="@color/grey_700"
-                android:textSize="20sp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/shift_BTN_delete"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/rounded_alpha"
-                app:icon="@drawable/img_delete"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconSize="36dp"
-                app:iconTint="@color/grey_700" />
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/shift_BTN_create"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:autoSizeTextType="uniform"
-        android:background="@drawable/rounded_button"
-        android:text="@string/shift_create"
-        android:textAllCaps="false"
-        android:textColor="@color/white_100" />
-
-</RelativeLayout>
+</LinearLayout>

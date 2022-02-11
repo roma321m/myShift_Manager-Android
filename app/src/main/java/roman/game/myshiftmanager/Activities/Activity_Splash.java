@@ -17,7 +17,7 @@ import roman.game.myshiftmanager.R;
 
 public class Activity_Splash extends AppCompatActivity {
 
-    private final int ANIM_DURATION = 4400;
+    private final int ANIM_DURATION = 2000;
     private ImageView splash_IMG_logo;
     private ProgressBar splash_PB;
 

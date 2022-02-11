@@ -290,56 +290,40 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <RadioGroup
-                    android:id="@+id/workplace_RG_color"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/workplace_textInputLayout_color"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/workplace_BTN_save"
+                    android:layout_below="@+id/shift_cardView_workplace"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="20dp"
+                    android:hint="@string/workplace_color"
+                    android:textColor="@color/grey_700"
+                    android:textColorHint="@color/grey_700"
+                    app:boxBackgroundColor="@color/white_100"
+                    app:boxStrokeColor="@color/grey_700"
+                    app:boxStrokeErrorColor="@color/red_200"
+                    app:counterTextColor="@color/grey_700"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/grey_700"
+                    app:placeholderTextColor="@color/grey_700">
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/workplace_IMG_blue"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_baseline_brightness_1_24"
-                        android:tint="@color/rb_blue" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/workplace_textInputEditText_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textIsSelectable="true"
+                        android:textAlignment="center"
+                        android:textColor="@color/grey_700"
+                        app:hintTextColor="@color/grey_700" />
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/workplace_IMG_green"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_baseline_brightness_1_24"
-                        android:tint="@color/rb_green" />
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/workplace_IMG_red"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_baseline_brightness_1_24"
-                        android:tint="@color/rb_red" />
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/workplace_IMG_purple"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_baseline_brightness_1_24"
-                        android:tint="@color/rb_purple" />
-
-                </RadioGroup>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <View
                     android:layout_width="match_parent"

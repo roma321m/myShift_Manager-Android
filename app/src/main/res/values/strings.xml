@@ -76,7 +76,11 @@
 
     <!-- dialog workplace -->
     <string name="dialog_workplaces_title"> <b>Select Workplace:</b></string>
-    <string name="dialog_workplaces_add"> <b>Add New workplace</b></string>
+
+    <!-- dialog color -->
+    <string name="dialog_color_title"> <b>Select Color:</b></string>
+    <string name="dialog_color_done">Done</string>
+
 
     <!-- shift_item -->
     <string name="shift_item_title_workplace"> <b>Workplace:</b></string>

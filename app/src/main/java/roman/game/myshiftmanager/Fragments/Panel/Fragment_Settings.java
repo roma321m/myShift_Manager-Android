@@ -61,12 +61,12 @@ public class Fragment_Settings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        findViews(view);
-        setDropdown();
-
         userDataManager = UserDataManager.getInstance();
         setData();
-        setOnStartSelected();
+
+        findViews(view);
+
+        setDropdown();
 
         settings_textInputEditText_workplaces.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,11 +112,9 @@ public class Fragment_Settings extends Fragment {
     }
 
     private void setOnStartSelected() {
-        // FIXME: 10/02/2022 - not working...
-        /*
         settings_autoCompleteTextView_currency.setSelection(currency);
         settings_autoCompleteTextView_time.setSelection(timeFormat);
-        settings_autoCompleteTextView_date.setSelection(dateFormat);*/
+        settings_autoCompleteTextView_date.setSelection(dateFormat);
     }
 
     private void setData() {
@@ -144,6 +142,9 @@ public class Fragment_Settings extends Fragment {
         String[] date = getResources().getStringArray(R.array.date);
         ArrayAdapter arrayAdapterDate = new ArrayAdapter(activity, R.layout.dropdown_item, date);
         settings_autoCompleteTextView_date.setAdapter(arrayAdapterDate);
+
+        // FIXME: 11/02/2022 - crash (shows that all the lists are 0 len)
+        //setOnStartSelected();
     }
 
     Callback_ViewDialogWorkplaces callback_viewDialogWorkplaces = new Callback_ViewDialogWorkplaces() {

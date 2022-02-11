@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Workplace implements Serializable {
 
-    private String name;
-    private int color, breakTimeUnpaid;
+    private String name, color;
+    private int breakTimeUnpaid;
     private double hourlyWage, vacationPayments, deductionPerShift, bonusesPerShift, dailyTravelExpenses, monthlyTravelExpenses;
 
     public Workplace() {
@@ -74,11 +74,11 @@ public class Workplace implements Serializable {
         return this;
     }
 
-    public int getColor() {
+    public String getColor() {
         return color;
     }
 
-    public Workplace setColor(int color) {
+    public Workplace setColor(String color) {
         this.color = color;
         return this;
     }

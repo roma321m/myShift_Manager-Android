@@ -119,7 +119,7 @@ public class UserDataManager {
     public void addWorkplace(String name, String hourlyWage, String vacationPayments,
                              String deductionPerShift, String bonusesPerShift,
                              String breakPerShiftUnpaid, String dailyTravelExpenses,
-                             String monthlyTravelExpenses, int color) {
+                             String monthlyTravelExpenses, String color) {
         Workplace workplace = new Workplace();
         workplace.setName(name);
         workplace.setColor(color);

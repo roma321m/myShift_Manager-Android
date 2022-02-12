@@ -38,7 +38,6 @@ public class Activity_MakeShift extends AppCompatActivity {
     private boolean newShift;
     private Shift shift;
     private int[] from, to; // [year, month, day, hourOfDay, minute]
-    private Calendar calendarFrom, calendarTo;
     private long milliseconds;
 
     @Override
@@ -94,7 +93,7 @@ public class Activity_MakeShift extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(milliseconds > 0){
-                    userDataManager.addShift(workplacePos, calendarFrom, calendarTo);
+                    userDataManager.addShift(workplacePos, from, to, milliseconds);
                     finish();
                 }
             }
@@ -161,8 +160,8 @@ public class Activity_MakeShift extends AppCompatActivity {
     }
 
     private long getTotalTime() {
-        calendarFrom = new GregorianCalendar(from[0], from[1], from[2], from[3], from[4]);
-        calendarTo = new GregorianCalendar(to[0], to[1], to[2], to[3], to[4]);
+        Calendar calendarFrom = new GregorianCalendar(from[0], from[1], from[2], from[3], from[4]);
+        Calendar calendarTo = new GregorianCalendar(to[0], to[1], to[2], to[3], to[4]);
         return calendarTo.getTime().getTime() - calendarFrom.getTime().getTime();
     }
 

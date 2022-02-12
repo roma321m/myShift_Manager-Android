@@ -144,7 +144,7 @@ public class Fragment_Settings extends Fragment {
         settings_autoCompleteTextView_date.setAdapter(arrayAdapterDate);
 
         // FIXME: 11/02/2022 - crash (shows that all the lists are 0 len)
-        //setOnStartSelected();
+        // setOnStartSelected();
     }
 
     Callback_ViewDialogWorkplaces callback_viewDialogWorkplaces = new Callback_ViewDialogWorkplaces() {

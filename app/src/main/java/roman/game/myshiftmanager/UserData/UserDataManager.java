@@ -5,7 +5,6 @@ import android.content.Context;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import roman.game.myshiftmanager.Objects.Shift;
 import roman.game.myshiftmanager.Objects.User;
@@ -107,12 +106,11 @@ public class UserDataManager {
         firebaseAuthManager.signOut();
     }
 
-    public void addShift(int workplacePos, Calendar calendarFrom, Calendar calendarTo) {
+    public void addShift(int workplacePos, int[] from, int[] to, long milliseconds) {
         Shift shift = new Shift();
         shift.setWorkplaceID(workplacePos);
-        shift.setStart(calendarFrom.getTime().toString());
-        shift.setEnd(calendarTo.getTime().toString());
-        long milliseconds = calendarTo.getTime().getTime() - calendarFrom.getTime().getTime();
+        shift.setStart(from);
+        shift.setEnd(to);
         Duration duration = Duration.ofMillis(milliseconds);
         long seconds = duration.getSeconds();
         double hours = seconds / 3600.0;
@@ -179,5 +177,4 @@ public class UserDataManager {
     public ArrayList<Shift> getShifts() {
         return shifts;
     }
-
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import roman.game.myshiftmanager.Objects.Shift;
 import roman.game.myshiftmanager.R;
+import roman.game.myshiftmanager.UserData.UserDataManager;
 
 public class Adapter_Shift extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -25,6 +26,8 @@ public class Adapter_Shift extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Activity activity;
     private ArrayList<Shift> shiftArrayList;
     private ShiftItemClickListener shiftItemClickListener;
+
+    private UserDataManager userDataManager;
 
     public Adapter_Shift(Activity activity, ArrayList<Shift> shifts) {
         this.activity = activity;
@@ -49,13 +52,22 @@ public class Adapter_Shift extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Shift s = getItem(position);
 
         // here - put data from s to the view
-        // FIXME: 08/02/2022 - crush - workplace null?
-        //shiftViewHolder.shift_LBL_workplace.setText(s.getWorkplace().getName());
-        shiftViewHolder.shift_LBL_start.setText(s.getStart().toString());
-        shiftViewHolder.shift_LBL_end.setText(s.getEnd().toString());
+        userDataManager = UserDataManager.getInstance();
+        String name = userDataManager.getWorkplaces().get(Integer.parseInt(s.getWorkplaceID())-1).getName();
+
+        // TODO: 12/02/2022 - by format from user settings
+
+        String start = String.format("%02d/%02d/%04d  %02d:%02d", s.getStartDayOfMonth(), s.getStartMonth(),
+                s.getStartYear(), s.getStartHour(), s.getStartMinutes());
+        String end = String.format("%02d/%02d/%04d  %02d:%02d", s.getEndDayOfMonth(), s.getEndMonth(),
+                s.getEndYear(), s.getEndHour(), s.getEndMinutes());
+
+        shiftViewHolder.shift_LBL_workplace.setText(name);
+        shiftViewHolder.shift_LBL_start.setText(start);
+        shiftViewHolder.shift_LBL_end.setText(end);
         shiftViewHolder.shift_LBL_revenue.setText("" + s.getRevenue());
 
-        // TODO: 08/02/2022 - get the currency from the data manager
+        // FIXME: 12/02/2022 - currency / need to get the string from resources by the index
     }
 
     @Override

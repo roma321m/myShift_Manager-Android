@@ -45,7 +45,7 @@ public class ViewDialog_DateTime {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        String time = "  " + hourOfDay + ":" + minute;
+                        String time = String.format("  %02d:%02d",hourOfDay, minute);
                         textInputEditText.setText(textInputEditText.getText() + time);
                         dateTime[3] = hourOfDay;
                         dateTime[4] = minute;
@@ -55,7 +55,9 @@ public class ViewDialog_DateTime {
                 timePickerDialog.show();
 
                 month = month + 1;
-                String date = day+"/"+month+"/"+year;
+                // TODO: 12/02/2022 - base on format from user data
+                String date = String.format("%02d/%02d/%04d" , day, month, year);
+
                 dateTime[0] = year;
                 dateTime[1] = month;
                 dateTime[2] = day;

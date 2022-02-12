@@ -15,16 +15,17 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import roman.game.myshiftmanager.Adapters.Adapter_Shift;
 import roman.game.myshiftmanager.Managers.ReportsMonthManager;
 import roman.game.myshiftmanager.Objects.Shift;
-import roman.game.myshiftmanager.Objects.Workplace;
 import roman.game.myshiftmanager.R;
 
 public class Fragment_Reports extends Fragment {
+
+    public interface Callback_ReportMonthManager{
+        void monthChange();
+    }
 
     private AppCompatActivity activity;
 
@@ -52,6 +53,7 @@ public class Fragment_Reports extends Fragment {
 
         reportsMonthManager = ReportsMonthManager.getInstance();
         reportsMonthManager.setViews(reports_LBL_month, reports_LBL_amount, reports_LBL_currency);
+        reportsMonthManager.setCallback_reportMonthManager(callback_reportMonthManager);
 
         linearLayoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
         reports_LST_shifts.setLayoutManager(linearLayoutManager);
@@ -75,7 +77,7 @@ public class Fragment_Reports extends Fragment {
         });
 
         // UI test
-        ArrayList<Shift> shifts = new ArrayList<>();
+        ArrayList<Shift> shifts = reportsMonthManager.getShifts();
         setShifts(shifts);
 
         return view;
@@ -97,6 +99,14 @@ public class Fragment_Reports extends Fragment {
             }
         });
     }
+
+    Callback_ReportMonthManager callback_reportMonthManager = new Callback_ReportMonthManager() {
+        @Override
+        public void monthChange() {
+            ArrayList<Shift> shifts = reportsMonthManager.getShifts();
+            setShifts(shifts);
+        }
+    };
 
     private void findViews(View view) {
         reports_LST_shifts = view.findViewById(R.id.reports_LST_shifts);

@@ -4,6 +4,12 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+import roman.game.myshiftmanager.Fragments.Panel.Fragment_Reports;
+import roman.game.myshiftmanager.Objects.Shift;
+import roman.game.myshiftmanager.Objects.Workplace;
+import roman.game.myshiftmanager.UserData.UserDataManager;
 
 public class ReportsMonthManager {
 
@@ -13,8 +19,12 @@ public class ReportsMonthManager {
     private MaterialTextView reports_LBL_currency;
     private MaterialTextView reports_LBL_amount;
 
+    private UserDataManager userDataManager;
+    private Fragment_Reports.Callback_ReportMonthManager callback_reportMonthManager;
+
     private ReportsMonthManager() {
         this.selectedDate = LocalDate.now();
+        userDataManager = UserDataManager.getInstance();
     }
 
     public static ReportsMonthManager getInstance() {
@@ -26,33 +36,47 @@ public class ReportsMonthManager {
 
     public void setViews(MaterialTextView reports_LBL_month,
                          MaterialTextView reports_LBL_amount,
-                         MaterialTextView reports_LBL_currency){
-        if(reports_LBL_month == null || reports_LBL_amount == null || reports_LBL_currency == null)
+                         MaterialTextView reports_LBL_currency) {
+        if (reports_LBL_month == null || reports_LBL_amount == null || reports_LBL_currency == null)
             return;
         this.reports_LBL_month = reports_LBL_month;
         this.reports_LBL_amount = reports_LBL_amount;
         this.reports_LBL_currency = reports_LBL_currency;
+    }
 
+    public void setCallback_reportMonthManager(Fragment_Reports.Callback_ReportMonthManager callback_reportMonthManager) {
+        this.callback_reportMonthManager = callback_reportMonthManager;
     }
 
     public void previousMonthAction() {
         selectedDate = selectedDate.minusMonths(1);
         setNewMonthViews();
 
-        // TODO: 09/02/2022 - change the shift list based on the month
+        callback_reportMonthManager.monthChange();
     }
 
     public void nextMonthAction() {
         selectedDate = selectedDate.plusMonths(1);
         setNewMonthViews();
 
-        // TODO: 09/02/2022 - change the shift list based on the month
+        callback_reportMonthManager.monthChange();
     }
 
     public void setNewMonthViews() {
         setMonthView();
         setCurrencyView();
         setAmountView();
+    }
+
+    public ArrayList<Shift> getShifts() {
+        ArrayList<Shift> shifts = userDataManager.getShifts();
+        ArrayList<Shift> show = new ArrayList<>();
+        for (Shift s : shifts) {
+            if (s.getStartYear() == selectedDate.getYear() && s.getStartMonth() == selectedDate.getMonthValue()) {
+                show.add(s);
+            }
+        }
+        return show;
     }
 
     private String monthYearFromDate(LocalDate date) {
@@ -71,13 +95,28 @@ public class ReportsMonthManager {
     private void setCurrencyView() {
         if (reports_LBL_currency == null)
             return;
-        // TODO: 08/02/2022 - set the text view based on the currency in db
+        userDataManager.getMyUser().getCurrency();
+        // FIXME: 12/02/2022 - currency / need to get the string from resources by the index
+        //reports_LBL_currency.setText(userDataManager.getMyUser().getCurrency());
     }
 
     private void setAmountView() {
         if (reports_LBL_amount == null)
             return;
-        // TODO: 08/02/2022 - set the text view based on the total revenue on the list for the related month
+        ArrayList<Shift> shifts = getShifts();
+        int revenue = 0;
+        for (Shift s : shifts) {
+            revenue += s.getRevenue();
+        }
+
+        // add monthly stuff
+        if (revenue != 0) {
+            ArrayList<Workplace> workplaces = userDataManager.getWorkplaces();
+            for (Workplace w : workplaces) {
+                revenue += w.getMonthlyRevenue();
+            }
+        }
+        reports_LBL_amount.setText("" + revenue);
     }
 
 }

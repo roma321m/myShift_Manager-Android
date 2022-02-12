@@ -118,7 +118,6 @@ public class Workplace implements Serializable {
     }
 
     public double getMonthlyRevenue(){
-        // TODO: 12/02/2022 - use it for monthly calculation 
         return vacationPayments + monthlyTravelExpenses;
     }
 }

@@ -3,7 +3,9 @@ package roman.game.myshiftmanager.UserData;
 import android.app.Activity;
 import android.content.Context;
 
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import roman.game.myshiftmanager.Objects.Shift;
 import roman.game.myshiftmanager.Objects.User;
@@ -105,10 +107,17 @@ public class UserDataManager {
         firebaseAuthManager.signOut();
     }
 
-    public void addShift() {
+    public void addShift(int workplacePos, Calendar calendarFrom, Calendar calendarTo) {
         Shift shift = new Shift();
-
-        // TODO: 10/02/2022 create new shift and add it to the user
+        shift.setWorkplaceID(workplacePos);
+        shift.setStart(calendarFrom.getTime().toString());
+        shift.setEnd(calendarTo.getTime().toString());
+        long milliseconds = calendarTo.getTime().getTime() - calendarFrom.getTime().getTime();
+        Duration duration = Duration.ofMillis(milliseconds);
+        long seconds = duration.getSeconds();
+        double hours = seconds / 3600.0;
+        shift.setTotalTime(hours);
+        shift.setRevenue(workplaces.get(workplacePos-1).getRevenue(shift.getTotalTime()));
 
         shifts.add(shift);
         int shiftId = shifts.size();
@@ -170,4 +179,5 @@ public class UserDataManager {
     public ArrayList<Shift> getShifts() {
         return shifts;
     }
+
 }

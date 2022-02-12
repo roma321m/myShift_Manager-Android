@@ -1,5 +1,6 @@
 package roman.game.myshiftmanager.Dialog;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
@@ -39,18 +40,21 @@ public class ViewDialog_ColorPicker {
         dialog_color_IMG_picker.buildDrawingCache(true);
 
         dialog_color_IMG_picker.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN){
-                    bitmap = dialog_color_IMG_picker.getDrawingCache();
-
-                    int pixels = bitmap.getPixel((int)event.getX(),(int) event.getY());
-                    int red = Color.red(pixels);
-                    int green = Color.green(pixels);
-                    int blue = Color.blue(pixels);
-                    String hex = "#" + Integer.toHexString(pixels);
-                    color = hex;
-                    dialog_color_IMG_indicator.setBackgroundColor(Color.rgb(red,green,blue));
+                if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE){
+                    try {
+                        bitmap = dialog_color_IMG_picker.getDrawingCache();
+                        int pixels = bitmap.getPixel((int)event.getX(),(int) event.getY());
+                        int red = Color.red(pixels);
+                        int green = Color.green(pixels);
+                        int blue = Color.blue(pixels);
+                        String hex = "#" + Integer.toHexString(pixels);
+                        color = hex;
+                        dialog_color_IMG_indicator.setBackgroundColor(Color.rgb(red,green,blue));
+                    } catch (Exception e){
+                    }
                 }
                 return true;
             }

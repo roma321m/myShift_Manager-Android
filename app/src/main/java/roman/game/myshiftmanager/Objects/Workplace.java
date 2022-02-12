@@ -106,4 +106,19 @@ public class Workplace implements Serializable {
                 ", monthlyTravelExpenses=" + monthlyTravelExpenses +
                 '}';
     }
+
+    public double getRevenue(double totalTime) {
+        double revenue = 0;
+
+        totalTime = totalTime - (breakTimeUnpaid/60);
+        revenue += hourlyWage*totalTime;
+        revenue += bonusesPerShift + dailyTravelExpenses;
+        revenue -= deductionPerShift;
+        return revenue;
+    }
+
+    public double getMonthlyRevenue(){
+        // TODO: 12/02/2022 - use it for monthly calculation 
+        return vacationPayments + monthlyTravelExpenses;
+    }
 }

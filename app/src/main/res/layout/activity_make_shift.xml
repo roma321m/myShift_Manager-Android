@@ -62,17 +62,17 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         android:orientation="horizontal">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/workplace_IMG_blue"
+                            android:id="@+id/shift_IMG_color"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_baseline_brightness_1_24"
-                            android:tint="@color/rb_blue" />
+                            android:layout_weight="1" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -86,7 +86,7 @@
                                 android:gravity="center"
                                 android:text="@string/shift_workplace"
                                 android:textColor="@color/grey_700"
-                                android:textSize="16sp" />
+                                android:textSize="10sp" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/shift_LBL_workplace_name"
@@ -95,7 +95,7 @@
                                 android:gravity="center"
                                 android:text="@string/shift_workplace_name"
                                 android:textColor="@color/grey_700"
-                                android:textSize="18sp" />
+                                android:textSize="22sp" />
                         </LinearLayout>
 
                         <com.google.android.material.button.MaterialButton

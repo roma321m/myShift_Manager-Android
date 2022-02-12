@@ -1,4 +1,4 @@
-package roman.game.myshiftmanager.Managers;
+package roman.game.myshiftmanager.Dialog;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -11,30 +11,33 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
 
-public class DateTimeDialogManager {
+import roman.game.myshiftmanager.Activities.Activity_MakeShift;
 
-    private static DateTimeDialogManager single_instance = null;
+public class ViewDialog_DateTime {
+
+    private static ViewDialog_DateTime single_instance = null;
 
     private Calendar calendar;
     private int year;
     private int month;
     private int day;
 
-    private DateTimeDialogManager() {
+    private ViewDialog_DateTime() {
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
     }
 
-    public static DateTimeDialogManager getInstance() {
+    public static ViewDialog_DateTime getInstance() {
         if (single_instance == null) {
-            single_instance = new DateTimeDialogManager();
+            single_instance = new ViewDialog_DateTime();
         }
         return single_instance;
     }
 
-    public void setDateTimeDialog(AppCompatActivity activity, TextInputEditText textInputEditText){
+    public void setDateTimeDialog(AppCompatActivity activity, Activity_MakeShift.Callback_ViewDialogDateTime callback_viewDialogDateTime,
+                                  TextInputEditText textInputEditText, int[] dateTime){
         DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -44,13 +47,18 @@ public class DateTimeDialogManager {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String time = "  " + hourOfDay + ":" + minute;
                         textInputEditText.setText(textInputEditText.getText() + time);
-                        // TODO: 09/02/2022 - callback when the data ready with it for the activity that is using this.
+                        dateTime[3] = hourOfDay;
+                        dateTime[4] = minute;
+                        callback_viewDialogDateTime.done();
                     }
                 },0,0,true);
                 timePickerDialog.show();
 
                 month = month + 1;
                 String date = day+"/"+month+"/"+year;
+                dateTime[0] = year;
+                dateTime[1] = month;
+                dateTime[2] = day;
                 textInputEditText.setText(date);
             }
         },year,month,day);

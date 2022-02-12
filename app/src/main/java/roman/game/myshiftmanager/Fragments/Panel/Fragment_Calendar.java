@@ -60,23 +60,6 @@ public class Fragment_Calendar extends Fragment {
 
         // UI test
         ArrayList<Shift> shifts = new ArrayList<>();
-        Date d = Calendar.getInstance().getTime();
-        Workplace w = new Workplace();
-        w.setName("test workplace");
-
-        Shift s1 = new Shift(d, d, w);
-        Shift s2 = new Shift(d, d, w);
-        Shift s3 = new Shift(d, d, w);
-        Shift s4 = new Shift(d, d, w);
-        Shift s5 = new Shift(d, d, w);
-        shifts.add(s1);
-        shifts.add(s2);
-        shifts.add(s3);
-        shifts.add(s4);
-        shifts.add(s5);
-        shifts.add(s5);
-        shifts.add(s5);
-
         setShifts(shifts);
 
         return view;

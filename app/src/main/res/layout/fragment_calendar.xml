@@ -3,26 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white_100"
     tools:context=".Activities.Activity_Panel"
     android:orientation="vertical">
 
-    <CalendarView
+    <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendar_calendar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:soundEffectsEnabled="true">
-
-    </CalendarView>
+        android:layout_weight="1.5"
+        app:type="one_day_picker"
+        app:eventsEnabled="true"
+        app:headerColor="@color/grey_700"
+        app:headerLabelColor="@color/white_100"
+        app:selectionColor="@color/red_400"
+        app:todayLabelColor="@color/red_400"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendar_LST_shifts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"

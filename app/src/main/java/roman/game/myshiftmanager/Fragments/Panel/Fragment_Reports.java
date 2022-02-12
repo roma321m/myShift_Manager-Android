@@ -76,7 +76,6 @@ public class Fragment_Reports extends Fragment {
             }
         });
 
-        // UI test
         ArrayList<Shift> shifts = reportsMonthManager.getShifts();
         setShifts(shifts);
 

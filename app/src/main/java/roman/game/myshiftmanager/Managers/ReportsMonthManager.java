@@ -95,8 +95,8 @@ public class ReportsMonthManager {
     private void setCurrencyView() {
         if (reports_LBL_currency == null)
             return;
-        userDataManager.getMyUser().getCurrency();
         // FIXME: 12/02/2022 - currency / need to get the string from resources by the index
+        // userDataManager.getMyUser().getCurrency();
         //reports_LBL_currency.setText(userDataManager.getMyUser().getCurrency());
     }
 

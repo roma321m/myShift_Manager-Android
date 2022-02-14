@@ -12,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Calendar;
 
 import roman.game.myshiftmanager.Activities.Activity_MakeShift;
+import roman.game.myshiftmanager.UserData.UserDataManager;
 
 public class ViewDialog_DateTime {
 
@@ -21,12 +22,14 @@ public class ViewDialog_DateTime {
     private int year;
     private int month;
     private int day;
+    private UserDataManager userDataManager;
 
     private ViewDialog_DateTime() {
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
+        userDataManager = UserDataManager.getInstance();
     }
 
     public static ViewDialog_DateTime getInstance() {
@@ -55,8 +58,8 @@ public class ViewDialog_DateTime {
                 timePickerDialog.show();
 
                 month = month + 1;
-                // TODO: 12/02/2022 - base on format from user data
-                String date = String.format("%02d/%02d/%04d" , day, month, year);
+
+                String date = userDataManager.getDateInFormat(day, month, year);
 
                 dateTime[0] = year;
                 dateTime[1] = month;

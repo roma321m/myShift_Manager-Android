@@ -24,63 +24,76 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/settings_menu1"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:id="@+id/settings_textInputLayout_currency"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:hint="@string/settings_currency"
+                    android:textColor="@color/grey_700"
                     android:textColorHint="@color/grey_700"
                     app:boxBackgroundColor="@color/white_100"
                     app:boxStrokeColor="@color/grey_700"
+                    app:boxStrokeErrorColor="@color/red_200"
+                    app:counterTextColor="@color/grey_700"
                     app:hintEnabled="true"
-                    app:hintTextColor="@color/grey_700">
+                    app:hintTextColor="@color/grey_700"
+                    app:placeholderTextColor="@color/grey_700">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/settings_autoCompleteTextView_currency"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/settings_textInputEditText_currency"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:inputType="none"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textIsSelectable="true"
+                        android:textAlignment="center"
                         android:textColor="@color/grey_700"
-                        android:textColorHighlight="@color/white_100"
-                        android:textColorHint="@color/white_100"
-                        android:textColorLink="@color/white_100" />
+                        app:hintTextColor="@color/grey_700" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/settings_menu2"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:id="@+id/settings_textInputLayout_time"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:hint="@string/settings_time"
+                    android:textColor="@color/grey_700"
                     android:textColorHint="@color/grey_700"
                     app:boxBackgroundColor="@color/white_100"
                     app:boxStrokeColor="@color/grey_700"
+                    app:boxStrokeErrorColor="@color/red_200"
+                    app:counterTextColor="@color/grey_700"
                     app:hintEnabled="true"
-                    app:hintTextColor="@color/grey_700">
+                    app:hintTextColor="@color/grey_700"
+                    app:placeholderTextColor="@color/grey_700">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/settings_autoCompleteTextView_time"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/settings_textInputEditText_time"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:inputType="none"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textIsSelectable="true"
+                        android:textAlignment="center"
                         android:textColor="@color/grey_700"
-                        android:textColorHighlight="@color/white_100"
-                        android:textColorHint="@color/white_100"
-                        android:textColorLink="@color/white_100" />
+                        app:hintTextColor="@color/grey_700" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/settings_menu3"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:id="@+id/settings_textInputLayout_date"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -92,18 +105,24 @@
                     app:boxBackgroundColor="@color/white_100"
                     app:boxStrokeColor="@color/grey_700"
                     app:hintEnabled="true"
-                    app:hintTextColor="@color/grey_700">
+                    app:hintTextColor="@color/grey_700"
+                    android:textColor="@color/grey_700"
+                    app:boxStrokeErrorColor="@color/red_200"
+                    app:counterTextColor="@color/grey_700"
+                    app:placeholderTextColor="@color/grey_700">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/settings_autoCompleteTextView_date"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/settings_textInputEditText_date"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:inputType="none"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textIsSelectable="true"
+                        android:textAlignment="center"
                         android:textColor="@color/grey_700"
-                        android:textColorHighlight="@color/white_100"
-                        android:textColorHint="@color/white_100"
-                        android:textColorLink="@color/white_100" />
+                        app:hintTextColor="@color/grey_700"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 

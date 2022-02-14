@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -18,7 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 
 import roman.game.myshiftmanager.Activities.Activity_MakeWorkplace;
-import roman.game.myshiftmanager.Dialog.ViewDialog_Workplaces;
+import roman.game.myshiftmanager.Dialog.ViewDialog_List;
 import roman.game.myshiftmanager.Objects.User;
 import roman.game.myshiftmanager.Objects.Workplace;
 import roman.game.myshiftmanager.R;
@@ -28,19 +25,13 @@ public class Fragment_Settings extends Fragment {
 
     private AppCompatActivity activity;
 
-    private AutoCompleteTextView settings_autoCompleteTextView_currency;
-    private AutoCompleteTextView settings_autoCompleteTextView_time;
-    private AutoCompleteTextView settings_autoCompleteTextView_date;
+    private TextInputEditText settings_textInputEditText_currency;
+    private TextInputEditText settings_textInputEditText_time;
+    private TextInputEditText settings_textInputEditText_date;
     private TextInputEditText settings_textInputEditText_workplaces;
     private MaterialButton settings_BTN_save;
 
     private UserDataManager userDataManager;
-    private int currency, dateFormat, timeFormat;
-
-    public interface Callback_ViewDialogWorkplaces {
-        void workplaceSelected(int pos);
-        void newWorkplaceSelected();
-    }
 
     public Fragment_Settings() {
     }
@@ -51,77 +42,73 @@ public class Fragment_Settings extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        setDropdown();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         userDataManager = UserDataManager.getInstance();
-        setData();
 
         findViews(view);
-
-        setDropdown();
+        setData();
 
         settings_textInputEditText_workplaces.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (userDataManager.getWorkplaces().size() > 0) {
-                    ViewDialog_Workplaces dialog = new ViewDialog_Workplaces();
-                    dialog.showDialog(activity, userDataManager.getWorkplaces(), callback_viewDialogWorkplaces);
+                    ArrayList<String> list = new ArrayList<>();
+                    for (Workplace w : userDataManager.getWorkplaces()) {
+                        list.add(w.getName());
+                    }
+                    list.add("Add new workplace");
+
+                    ViewDialog_List dialog = new ViewDialog_List();
+                    dialog.showDialog(activity, "Workplaces", list, callback_viewDialogWorkplaces);
+
                 } else {
                     openActivity(Activity_MakeWorkplace.class);
                 }
             }
         });
-        
+
+        settings_textInputEditText_currency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewDialog_List dialog = new ViewDialog_List();
+                dialog.showDialog(activity, "Currency", UserDataManager.currencyList, callback_viewDialogCurrency);
+            }
+        });
+
+        settings_textInputEditText_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewDialog_List dialog = new ViewDialog_List();
+                dialog.showDialog(activity, "Time Format", UserDataManager.timeFormatList, callback_viewDialogTimeFormat);
+            }
+        });
+
+        settings_textInputEditText_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewDialog_List dialog = new ViewDialog_List();
+                dialog.showDialog(activity, "Date Format", UserDataManager.dateFormatList, callback_viewDialogDateFormat);
+            }
+        });
+
+        settings_BTN_save.setVisibility(View.INVISIBLE); // temp
         settings_BTN_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 10/02/2022 - check if one of the setting different from the user data, if so, update user data and db... 
-            }
-        });
-
-        settings_autoCompleteTextView_currency.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                currency = position;
-            }
-        });
-
-        settings_autoCompleteTextView_time.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                timeFormat = position;
-            }
-        });
-
-        settings_autoCompleteTextView_date.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                dateFormat = position;
+                // TODO: 10/02/2022 - add option for name change and save it to db..
             }
         });
 
         return view;
     }
 
-    private void setOnStartSelected() {
-        settings_autoCompleteTextView_currency.setSelection(currency);
-        settings_autoCompleteTextView_time.setSelection(timeFormat);
-        settings_autoCompleteTextView_date.setSelection(dateFormat);
-    }
-
     private void setData() {
         User user = userDataManager.getMyUser();
-        currency = user.getCurrency();
-        dateFormat = user.getDateFormat();
-        timeFormat = user.getTimeFormat();
+        settings_textInputEditText_currency.setText(UserDataManager.currencyList.get(user.getCurrency()));
+        settings_textInputEditText_time.setText(UserDataManager.timeFormatList.get(user.getTimeFormat()));
+        settings_textInputEditText_date.setText(UserDataManager.dateFormatList.get(user.getDateFormat()));
     }
 
     private void openActivity(Class activity) {
@@ -130,44 +117,50 @@ public class Fragment_Settings extends Fragment {
         startActivity(intent);
     }
 
-    private void setDropdown() {
-        String[] currency = getResources().getStringArray(R.array.currency);
-        ArrayAdapter arrayAdapterCurrency = new ArrayAdapter(activity, R.layout.dropdown_item, currency);
-        settings_autoCompleteTextView_currency.setAdapter(arrayAdapterCurrency);
-
-        String[] time = getResources().getStringArray(R.array.time);
-        ArrayAdapter arrayAdapterTime = new ArrayAdapter(activity, R.layout.dropdown_item, time);
-        settings_autoCompleteTextView_time.setAdapter(arrayAdapterTime);
-
-        String[] date = getResources().getStringArray(R.array.date);
-        ArrayAdapter arrayAdapterDate = new ArrayAdapter(activity, R.layout.dropdown_item, date);
-        settings_autoCompleteTextView_date.setAdapter(arrayAdapterDate);
-
-        // FIXME: 11/02/2022 - crash (shows that all the lists are 0 len)
-        // setOnStartSelected();
-    }
-
-    Callback_ViewDialogWorkplaces callback_viewDialogWorkplaces = new Callback_ViewDialogWorkplaces() {
+    ViewDialog_List.Callback_ViewDialog callback_viewDialogWorkplaces = new ViewDialog_List.Callback_ViewDialog() {
         @Override
-        public void workplaceSelected(int pos) {
-            Workplace workplace = userDataManager.getWorkplaces().get(pos);
-            Intent intent = new Intent(activity, Activity_MakeWorkplace.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            intent.putExtra("workplace", workplace);
-            startActivity(intent);
+        public void itemClicked(int pos) {
+            if (pos == userDataManager.getWorkplaces().size()){
+                openActivity(Activity_MakeWorkplace.class);
+            } else {
+                Workplace workplace = userDataManager.getWorkplaces().get(pos);
+                Intent intent = new Intent(activity, Activity_MakeWorkplace.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("workplace", workplace);
+                startActivity(intent);
+            }
         }
+    };
 
+    ViewDialog_List.Callback_ViewDialog callback_viewDialogCurrency = new ViewDialog_List.Callback_ViewDialog() {
         @Override
-        public void newWorkplaceSelected() {
-            openActivity(Activity_MakeWorkplace.class);
+        public void itemClicked(int pos) {
+            settings_textInputEditText_currency.setText(UserDataManager.currencyList.get(pos));
+            userDataManager.updateCurrency(pos);
+        }
+    };
+
+    ViewDialog_List.Callback_ViewDialog callback_viewDialogTimeFormat = new ViewDialog_List.Callback_ViewDialog() {
+        @Override
+        public void itemClicked(int pos) {
+            settings_textInputEditText_time.setText(UserDataManager.timeFormatList.get(pos));
+            userDataManager.updateTimeFormat(pos);
+        }
+    };
+
+    ViewDialog_List.Callback_ViewDialog callback_viewDialogDateFormat = new ViewDialog_List.Callback_ViewDialog() {
+        @Override
+        public void itemClicked(int pos) {
+            settings_textInputEditText_date.setText(UserDataManager.dateFormatList.get(pos));
+            userDataManager.updateDateFormat(pos);
         }
     };
 
     private void findViews(View view) {
         settings_textInputEditText_workplaces = view.findViewById(R.id.settings_textInputEditText_workplaces);
-        settings_autoCompleteTextView_currency = view.findViewById(R.id.settings_autoCompleteTextView_currency);
-        settings_autoCompleteTextView_time = view.findViewById(R.id.settings_autoCompleteTextView_time);
-        settings_autoCompleteTextView_date = view.findViewById(R.id.settings_autoCompleteTextView_date);
+        settings_textInputEditText_currency = view.findViewById(R.id.settings_textInputEditText_currency);
+        settings_textInputEditText_time = view.findViewById(R.id.settings_textInputEditText_time);
+        settings_textInputEditText_date = view.findViewById(R.id.settings_textInputEditText_date);
         settings_BTN_save = view.findViewById(R.id.settings_BTN_save);
     }
 }

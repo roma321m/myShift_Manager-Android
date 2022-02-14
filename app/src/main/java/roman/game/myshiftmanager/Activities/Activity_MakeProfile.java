@@ -60,8 +60,7 @@ public class Activity_MakeProfile extends AppCompatActivity {
     }
 
     private void setDropdown(){
-        String[] currency = getResources().getStringArray(R.array.currency);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_item, currency);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_item, UserDataManager.currencyList);
         make_autoCompleteTextView.setAdapter(arrayAdapter);
     }
 

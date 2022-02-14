@@ -17,12 +17,12 @@
             android:layout_margin="10dp">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/workplace_LBL_name"
+                    android:id="@+id/item_LBL_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:text="the name"
+                    android:text="the text"
                     android:textAlignment="center"
                     android:textColor="@color/grey_700"
                     android:textSize="18sp" />

@@ -20,6 +20,7 @@ public class Adapter_Shift extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public interface ShiftItemClickListener {
         void editClicked(Shift shift);
+
         void deleteClicked(Shift shift);
     }
 
@@ -53,21 +54,18 @@ public class Adapter_Shift extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         // here - put data from s to the view
         userDataManager = UserDataManager.getInstance();
-        String name = userDataManager.getWorkplaces().get(Integer.parseInt(s.getWorkplaceID())-1).getName();
+        String name = userDataManager.getWorkplaces().get(Integer.parseInt(s.getWorkplaceID()) - 1).getName();
 
-        // TODO: 12/02/2022 - by format from user settings
-
-        String start = String.format("%02d/%02d/%04d  %02d:%02d", s.getStartDayOfMonth(), s.getStartMonth(),
+        String start = userDataManager.getDateTimeInFormat(s.getStartDayOfMonth(), s.getStartMonth(),
                 s.getStartYear(), s.getStartHour(), s.getStartMinutes());
-        String end = String.format("%02d/%02d/%04d  %02d:%02d", s.getEndDayOfMonth(), s.getEndMonth(),
+        String end = userDataManager.getDateTimeInFormat(s.getEndDayOfMonth(), s.getEndMonth(),
                 s.getEndYear(), s.getEndHour(), s.getEndMinutes());
 
         shiftViewHolder.shift_LBL_workplace.setText(name);
         shiftViewHolder.shift_LBL_start.setText(start);
         shiftViewHolder.shift_LBL_end.setText(end);
         shiftViewHolder.shift_LBL_revenue.setText("" + s.getRevenue());
-
-        // FIXME: 12/02/2022 - currency / need to get the string from resources by the index
+        shiftViewHolder.shift_LBL_currency.setText(UserDataManager.currencyList.get(userDataManager.getMyUser().getCurrency()));
     }
 
     @Override

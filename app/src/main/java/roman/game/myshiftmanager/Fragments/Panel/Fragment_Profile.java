@@ -83,11 +83,10 @@ public class Fragment_Profile extends Fragment {
         profile_LBL_first_name.setText(user.getFirstName());
         profile_LBL_last_name.setText(user.getLastName());
         profile_LBL_email.setText(user.getEmail());
-        String[] currency = getResources().getStringArray(R.array.currency);
-        if(user.getCurrency() < currency.length)
-            profile_LBL_currency.setText(currency[user.getCurrency()]);
+        if(user.getCurrency() < UserDataManager.currencyList.size())
+            profile_LBL_currency.setText(UserDataManager.currencyList.get(user.getCurrency()));
         else
-            profile_LBL_currency.setText(currency[0]);
+            profile_LBL_currency.setText(UserDataManager.currencyList.get(0));
     }
 
     private void openActivity(Class activity) {

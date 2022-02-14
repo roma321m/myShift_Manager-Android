@@ -185,6 +185,42 @@ public class FirebaseDB {
         };
         workplaces.child(userID).addListenerForSingleValueEvent(eventListener);
     }
+
+    public void updateCurrency(String uid, int value) {
+        if (uid != null) {
+            users.child(uid).child("currency").setValue(value)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // TODO: 10/02/2022 - ?
+                        }
+                    });
+        }
+    }
+
+    public void updateTimeFormat(String uid, int value) {
+        if (uid != null) {
+            users.child(uid).child("timeFormat").setValue(value)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // TODO: 10/02/2022 - ?
+                        }
+                    });
+        }
+    }
+
+    public void updateDateFormat(String uid, int value) {
+        if (uid != null) {
+            users.child(uid).child("dateFormat").setValue(value)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // TODO: 10/02/2022 - ?
+                        }
+                    });
+        }
+    }
 }
 
 

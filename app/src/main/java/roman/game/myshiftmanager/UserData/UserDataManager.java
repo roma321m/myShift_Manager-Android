@@ -12,6 +12,10 @@ import roman.game.myshiftmanager.Objects.Workplace;
 
 public class UserDataManager {
 
+    public static ArrayList<String> currencyList;
+    public static ArrayList<String> timeFormatList;
+    public static ArrayList<String> dateFormatList;
+
     private static UserDataManager single_instance = null;
     private Context context;
 
@@ -24,6 +28,7 @@ public class UserDataManager {
 
     private UserDataManager(Context context) {
         this.context = context;
+        setLists();
         firebaseAuthManager = FirebaseAuthManager.getInstance();
         firebaseDB = FirebaseDB.getInstance();
         firebaseDB.setCallback_loadUserData(callback_loadUserData);
@@ -38,6 +43,21 @@ public class UserDataManager {
 
     public static UserDataManager getInstance() {
         return single_instance;
+    }
+
+    private void setLists() {
+        currencyList = new ArrayList<>();
+        currencyList.add("₪  Shekel");
+        currencyList.add("$  US Dollar");
+        currencyList.add("€  Euro");
+
+        timeFormatList = new ArrayList<>();
+        timeFormatList.add("24h");
+        timeFormatList.add("12h");
+
+        dateFormatList = new ArrayList<>();
+        dateFormatList.add("dd/mm/yy");
+        dateFormatList.add("mm/dd/yy");
     }
 
     public User getMyUser() {
@@ -106,6 +126,37 @@ public class UserDataManager {
         firebaseAuthManager.signOut();
     }
 
+    public String getDateInFormat(int day, int month, int year) {
+        switch (myUser.getDateFormat()) {
+            case 0:
+                return String.format("%02d/%02d/%04d", day, month, year);
+            case 1:
+                return String.format("%02d/%02d/%04d", month, day, year);
+            default:
+                return "";
+        }
+    }
+
+    public String getTimeInFormat(int hours, int minutes) {
+        switch (myUser.getTimeFormat()) {
+            case 0:
+                return String.format("%02d:%02d", hours, minutes);
+            case 1:
+                if (hours > 12) {
+                    hours = hours - 12;
+                    return String.format("%02d:%02d PM", hours, minutes);
+                } else {
+                    return String.format("%02d:%02d AM", hours, minutes);
+                }
+            default:
+                return "";
+        }
+    }
+
+    public String getDateTimeInFormat(int day, int month, int year, int hours, int minutes) {
+        return getDateInFormat(day, month, year) + "  " + getTimeInFormat(hours, minutes);
+    }
+
     public void addShift(int workplacePos, int[] from, int[] to, long milliseconds) {
         Shift shift = new Shift();
         shift.setWorkplaceID(workplacePos);
@@ -115,7 +166,7 @@ public class UserDataManager {
         long seconds = duration.getSeconds();
         double hours = seconds / 3600.0;
         shift.setTotalTime(hours);
-        shift.setRevenue(workplaces.get(workplacePos-1).getRevenue(shift.getTotalTime()));
+        shift.setRevenue(workplaces.get(workplacePos - 1).getRevenue(shift.getTotalTime()));
 
         shifts.add(shift);
         int shiftId = shifts.size();
@@ -176,5 +227,20 @@ public class UserDataManager {
 
     public ArrayList<Shift> getShifts() {
         return shifts;
+    }
+
+    public void updateCurrency(int pos) {
+        myUser.setCurrency(pos);
+        firebaseDB.updateCurrency(firebaseAuthManager.getUser().getUid(), pos);
+    }
+
+    public void updateTimeFormat(int pos) {
+        myUser.setTimeFormat(pos);
+        firebaseDB.updateTimeFormat(firebaseAuthManager.getUser().getUid(), pos);
+    }
+
+    public void updateDateFormat(int pos) {
+        myUser.setDateFormat(pos);
+        firebaseDB.updateDateFormat(firebaseAuthManager.getUser().getUid(), pos);
     }
 }

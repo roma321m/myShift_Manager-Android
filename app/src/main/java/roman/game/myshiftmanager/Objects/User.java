@@ -2,6 +2,7 @@ package roman.game.myshiftmanager.Objects;
 
 public class User {
 
+    private String profilePic;
     private String firstName;
     private String lastName;
     private String email;
@@ -18,6 +19,15 @@ public class User {
 
     public User setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public User setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
         return this;
     }
 

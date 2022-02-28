@@ -24,7 +24,7 @@ public class UserDataManager {
     private ArrayList<Shift> shifts;
 
     private FirebaseAuthManager firebaseAuthManager;
-    FirebaseDB firebaseDB;
+    private FirebaseDB firebaseDB;
 
     private UserDataManager(Context context) {
         this.context = context;
@@ -60,11 +60,15 @@ public class UserDataManager {
         dateFormatList.add("mm/dd/yy");
     }
 
+    public String getUID(){
+        return firebaseAuthManager.getUser().getUid();
+    }
+
     public User getMyUser() {
         return myUser;
     }
 
-    public void setMyUser(String firstName, String lastName, String email, int currency) {
+    public void setMyUser(String firstName, String lastName, String email, int currency, String urlIMG) {
         workplaces = new ArrayList<>();
         shifts = new ArrayList<>();
         myUser = new User();
@@ -79,6 +83,7 @@ public class UserDataManager {
             myUser.setEmail(email);
         }
         myUser.setCurrency(currency);
+        myUser.setProfilePic(urlIMG);
         myUser.setTimeFormat(0);
         myUser.setDateFormat(0);
         String uid = firebaseAuthManager.getUser().getUid();

@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import roman.game.myshiftmanager.Activities.Activity_Login;
 import roman.game.myshiftmanager.Activities.Activity_MakeShift;
 import roman.game.myshiftmanager.Activities.Activity_MakeWorkplace;
@@ -25,7 +26,7 @@ public class Fragment_Profile extends Fragment {
     private AppCompatActivity activity;
 
     private MaterialButton profile_BTN_add_workplace, profile_BTN_add_shift, profile_BTN_logout;
-    private ShapeableImageView profile_IMG_pic;
+    private CircleImageView profile_IMG_pic;
     private MaterialTextView profile_LBL_first_name, profile_LBL_last_name, profile_LBL_email, profile_LBL_currency;
 
     private UserDataManager userDataManager;
@@ -87,6 +88,10 @@ public class Fragment_Profile extends Fragment {
             profile_LBL_currency.setText(UserDataManager.currencyList.get(user.getCurrency()));
         else
             profile_LBL_currency.setText(UserDataManager.currencyList.get(0));
+        String url = userDataManager.getMyUser().getProfilePic();
+        if(!url.equals("")){
+            Glide.with(this).load(url).into(profile_IMG_pic);
+        }
     }
 
     private void openActivity(Class activity) {

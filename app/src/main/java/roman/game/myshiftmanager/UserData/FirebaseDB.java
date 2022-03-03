@@ -78,9 +78,9 @@ public class FirebaseDB {
         }
     }
 
-    public void addShift(String uid, int shiftId, Shift shift) {
-        if (shift != null && uid != null && shiftId != 0) {
-            shifts.child(uid).child("" + shiftId).setValue(shift)
+    public void addShift(String uid, Shift shift) {
+        if (shift != null && uid != null) {
+            shifts.child(uid).child(shift.getId()).setValue(shift)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -90,9 +90,14 @@ public class FirebaseDB {
         }
     }
 
-    public void addWorkplace(String uid, int workId, Workplace workplace) {
-        if (workplace != null && uid != null && workId != 0) {
-            workplaces.child(uid).child("" + workId).setValue(workplace)
+    public void removeShift(String uid, String shiftId) {
+        if ( uid != null && shiftId != null)
+            shifts.child(uid).child(shiftId).removeValue();
+    }
+
+    public void addWorkplace(String uid, Workplace workplace) {
+        if (workplace != null && uid != null) {
+            workplaces.child(uid).child(workplace.getId()).setValue(workplace)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -100,6 +105,11 @@ public class FirebaseDB {
                         }
                     });
         }
+    }
+
+    public void removeWorkplace(String uid, String workplaceId) {
+        if ( uid != null && workplaceId != null)
+            workplaces.child(uid).child(workplaceId).removeValue();
     }
 
     public void hasProfile(String userID) {

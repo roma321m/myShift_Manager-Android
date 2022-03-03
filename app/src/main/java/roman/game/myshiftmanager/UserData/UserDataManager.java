@@ -162,21 +162,33 @@ public class UserDataManager {
         return getDateInFormat(day, month, year) + "  " + getTimeInFormat(hours, minutes);
     }
 
-    public void addShift(int workplacePos, int[] from, int[] to, long milliseconds) {
+    public void addShift(Workplace workplace, int[] from, int[] to, long milliseconds) {
+        if (workplace == null)
+            return;
         Shift shift = new Shift();
-        shift.setWorkplaceID(workplacePos);
+        shift.setWorkplaceID(workplace.getId());
         shift.setStart(from);
         shift.setEnd(to);
         Duration duration = Duration.ofMillis(milliseconds);
         long seconds = duration.getSeconds();
         double hours = seconds / 3600.0;
         shift.setTotalTime(hours);
-        shift.setRevenue(workplaces.get(workplacePos - 1).getRevenue(shift.getTotalTime()));
+        shift.setRevenue(workplace.getRevenue(shift.getTotalTime()));
 
         shifts.add(shift);
-        int shiftId = shifts.size();
+        firebaseDB.addShift(firebaseAuthManager.getUser().getUid(), shift);
+    }
 
-        firebaseDB.addShift(firebaseAuthManager.getUser().getUid(), shiftId, shift);
+    public void removeShift(Shift shift){
+        if(shift == null)
+            return;
+        firebaseDB.removeShift(firebaseAuthManager.getUser().getUid(), shift.getId());
+        for (Shift shift1 : shifts){
+            if (shift.getId().equals(shift1.getId())){
+                shifts.remove(shift1);
+                return;
+            }
+        }
     }
 
     public void addWorkplace(String name, String hourlyWage, String vacationPayments,
@@ -202,9 +214,19 @@ public class UserDataManager {
             workplace.setMonthlyTravelExpenses(Double.parseDouble(monthlyTravelExpenses));
 
         workplaces.add(workplace);
-        int workId = workplaces.size();
+        firebaseDB.addWorkplace(firebaseAuthManager.getUser().getUid(), workplace);
+    }
 
-        firebaseDB.addWorkplace(firebaseAuthManager.getUser().getUid(), workId, workplace);
+    public void removeWorkplace(Workplace workplace){
+        if(workplace == null)
+            return;
+        firebaseDB.removeWorkplace(firebaseAuthManager.getUser().getUid(), workplace.getId());
+        for (Workplace workplace1 : workplaces){
+            if (workplace.getId().equals(workplace1.getId())){
+                workplaces.remove(workplace1);
+                return;
+            }
+        }
     }
 
     FirebaseDB.Callback_loadUserData callback_loadUserData = new FirebaseDB.Callback_loadUserData() {
@@ -228,6 +250,16 @@ public class UserDataManager {
 
     public ArrayList<Workplace> getWorkplaces() {
         return workplaces;
+    }
+
+    public Workplace getWorkplace(String id){
+        if (id == null || workplaces.isEmpty())
+            return null;
+        for (Workplace workplace: workplaces){
+            if (workplace.getId().equals(id))
+                return workplace;
+        }
+        return null;
     }
 
     public ArrayList<Shift> getShifts() {

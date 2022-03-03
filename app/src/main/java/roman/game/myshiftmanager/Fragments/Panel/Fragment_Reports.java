@@ -17,9 +17,11 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.ArrayList;
 
 import roman.game.myshiftmanager.Adapters.Adapter_Shift;
+import roman.game.myshiftmanager.Dialog.ViewDialog_Confirmation;
 import roman.game.myshiftmanager.Managers.ReportsMonthManager;
 import roman.game.myshiftmanager.Objects.Shift;
 import roman.game.myshiftmanager.R;
+import roman.game.myshiftmanager.UserData.UserDataManager;
 
 public class Fragment_Reports extends Fragment {
 
@@ -36,6 +38,7 @@ public class Fragment_Reports extends Fragment {
     private MaterialButton reports_BTN_right, reports_BTN_left;
 
     private ReportsMonthManager reportsMonthManager;
+    private UserDataManager userDataManager;
 
     public Fragment_Reports() {
     }
@@ -50,6 +53,7 @@ public class Fragment_Reports extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reports, container, false);
 
         findViews(view);
+        userDataManager = UserDataManager.getInstance();
 
         reportsMonthManager = ReportsMonthManager.getInstance();
         reportsMonthManager.setViews(reports_LBL_month, reports_LBL_amount, reports_LBL_currency);
@@ -94,7 +98,19 @@ public class Fragment_Reports extends Fragment {
 
             @Override
             public void deleteClicked(Shift shift) {
-                // TODO: 08/02/2022 - popup for conformation
+                ViewDialog_Confirmation dialog_confirmation = new ViewDialog_Confirmation();
+                dialog_confirmation.showDialog(activity,
+                        "Delete a Shift",
+                        "please confirm that you want to delete this shift: " + shift.toString(),
+                        new ViewDialog_Confirmation.Callback_ViewDialogConfirmation() {
+                    @Override
+                    public void confirmClicked() {
+                        userDataManager.removeShift(shift);
+                        reportsMonthManager.setNewMonthViews();
+                        ArrayList<Shift> shifts = reportsMonthManager.getShifts();
+                        setShifts(shifts);
+                    }
+                });
             }
         });
     }

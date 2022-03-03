@@ -23,8 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 import roman.game.myshiftmanager.Adapters.Adapter_Shift;
+import roman.game.myshiftmanager.Dialog.ViewDialog_Confirmation;
 import roman.game.myshiftmanager.Objects.Shift;
-import roman.game.myshiftmanager.Objects.Workplace;
 import roman.game.myshiftmanager.R;
 import roman.game.myshiftmanager.UserData.UserDataManager;
 
@@ -88,12 +88,9 @@ public class Fragment_Calendar extends Fragment {
         List<EventDay> events = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
 
-        ArrayList<Shift> shifts = userDataManager.getShifts();
-        ArrayList<Workplace> workplaces = userDataManager.getWorkplaces();
-
-        for(Shift s: shifts){
+        for(Shift s: userDataManager.getShifts()){
             calendar.set(s.getStartYear(), s.getStartMonth(), s.getStartDayOfMonth());
-            String color = workplaces.get(Integer.parseInt(s.getWorkplaceID())-1).getColor();
+            String color = userDataManager.getWorkplace(s.getWorkplaceID()).getColor();
             events.add(new EventDay(calendar, R.drawable.ic_dot, Color.parseColor(color)));
             // FIXME: 12/02/2022 - not working here
         }
@@ -136,7 +133,19 @@ public class Fragment_Calendar extends Fragment {
 
             @Override
             public void deleteClicked(Shift shift) {
-                // TODO: 08/02/2022 - popup for conformation
+                ViewDialog_Confirmation dialog_confirmation = new ViewDialog_Confirmation();
+                dialog_confirmation.showDialog(activity,
+                        "Delete a Shift",
+                        "please confirm that you want to delete this shift: " + shift.toString(),
+                        new ViewDialog_Confirmation.Callback_ViewDialogConfirmation() {
+                            @Override
+                            public void confirmClicked() {
+                                userDataManager.removeShift(shift);
+                                setEvents();
+                                ArrayList<Shift> shifts = getShifts(shift.getStartYear(), shift.getStartMonth(), shift.getStartDayOfMonth());
+                                setShifts(shifts);
+                            }
+                        });
             }
         });
     }

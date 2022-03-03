@@ -1,14 +1,25 @@
 package roman.game.myshiftmanager.Objects;
 
-import java.io.Serializable;
+import java.io.Serializable; // only serializable obj can be sent in intent
+import java.util.UUID;
 
 public class Workplace implements Serializable {
 
+    private String id;
     private String name, color;
     private int breakTimeUnpaid;
     private double hourlyWage, vacationPayments, deductionPerShift, bonusesPerShift, dailyTravelExpenses, monthlyTravelExpenses;
 
     public Workplace() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Workplace setId() {
+        return this;
     }
 
     public int getBreakTimeUnpaid() {

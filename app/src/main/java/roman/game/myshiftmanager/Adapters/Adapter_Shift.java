@@ -54,7 +54,7 @@ public class Adapter_Shift extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         // here - put data from s to the view
         userDataManager = UserDataManager.getInstance();
-        String name = userDataManager.getWorkplaces().get(Integer.parseInt(s.getWorkplaceID()) - 1).getName();
+        String name = userDataManager.getWorkplace(s.getWorkplaceID()).getName();
 
         String start = userDataManager.getDateTimeInFormat(s.getStartDayOfMonth(), s.getStartMonth(),
                 s.getStartYear(), s.getStartHour(), s.getStartMinutes());

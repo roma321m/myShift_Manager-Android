@@ -1,10 +1,12 @@
 package roman.game.myshiftmanager.Objects;
 
-import java.io.Serializable;
+import java.io.Serializable; // only serializable obj can be sent in intent
 import java.time.Duration;
+import java.util.UUID;
 
 public class Shift implements Serializable {
 
+    private String id;
     private int startYear, startMonth, startDayOfMonth, startHour, startMinutes;
     private int endYear, endMonth, endDayOfMonth, endHour, endMinutes;
     private String workplaceID;
@@ -12,6 +14,15 @@ public class Shift implements Serializable {
     private double revenue;
 
     public Shift() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Shift setId() {
+        return this;
     }
 
     public int getStartYear() {
@@ -113,11 +124,6 @@ public class Shift implements Serializable {
         return workplaceID;
     }
 
-    public Shift setWorkplaceID(int workplaceID) {
-        this.workplaceID = workplaceID + "";
-        return this;
-    }
-
     public double getTotalTime() {
         return totalTime;
     }
@@ -158,5 +164,12 @@ public class Shift implements Serializable {
         setEndDayOfMonth(to[2]);
         setEndHour(to[3]);
         setEndMinutes(to[4]);
+    }
+
+    @Override
+    public String toString() {
+        return "Shift{" +
+                "id='" + id + '\'' +
+                '}';
     }
 }

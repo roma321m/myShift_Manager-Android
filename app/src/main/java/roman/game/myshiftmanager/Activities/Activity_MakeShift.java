@@ -93,7 +93,7 @@ public class Activity_MakeShift extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(milliseconds > 0){
-                    userDataManager.addShift(workplacePos, from, to, milliseconds);
+                    userDataManager.addShift(userDataManager.getWorkplaces().get(workplacePos-1), from, to, milliseconds);
                     finish();
                 }
             }

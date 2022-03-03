@@ -81,6 +81,11 @@
     <string name="dialog_color_title"> <b>Select Color:</b></string>
     <string name="dialog_color_done">Done</string>
 
+    <!-- dialog confirm -->
+    <string name="dialog_confirm_title"> <b>Title</b></string>
+    <string name="dialog_confirm_btn">Confirm</string>
+    <string name="dialog_confirm_body">Body of the msg here</string>
+
     <!-- shift_item -->
     <string name="shift_item_title_workplace"> <b>Workplace:</b></string>
     <string name="shift_item_title_start"> <b>Shift started:</b></string>

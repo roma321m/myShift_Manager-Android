@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 
+import roman.game.myshiftmanager.Dialog.ViewDialog_Confirmation;
 import roman.game.myshiftmanager.Fragments.Panel.Fragment_Calendar;
 import roman.game.myshiftmanager.Fragments.Panel.Fragment_Profile;
 import roman.game.myshiftmanager.Fragments.Panel.Fragment_Reports;
@@ -123,6 +124,12 @@ public class Activity_Panel extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        ViewDialog_Confirmation viewDialog_confirmation = new ViewDialog_Confirmation();
+        viewDialog_confirmation.showDialog(this, "Exit application", "please confirm that you want to exit", new ViewDialog_Confirmation.Callback_ViewDialogConfirmation() {
+            @Override
+            public void confirmClicked() {
+                finish();
+            }
+        });
     }
 }

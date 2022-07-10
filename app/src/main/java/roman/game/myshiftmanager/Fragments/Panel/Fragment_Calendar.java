@@ -1,12 +1,19 @@
 package roman.game.myshiftmanager.Fragments.Panel;
 
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +27,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import roman.game.myshiftmanager.Adapters.Adapter_Shift;
@@ -41,8 +49,6 @@ public class Fragment_Calendar extends Fragment {
     public Fragment_Calendar() {
     }
 
-    ;
-
     public Fragment_Calendar setActivity(AppCompatActivity activity) {
         this.activity = activity;
         return this;
@@ -61,19 +67,16 @@ public class Fragment_Calendar extends Fragment {
         calendar_LST_shifts.setHasFixedSize(true);
         calendar_LST_shifts.setItemAnimator(new DefaultItemAnimator());
 
-        calendar_calendar.setOnDayClickListener(new OnDayClickListener() {
-            @Override
-            public void onDayClick(EventDay eventDay) {
-                Date d = eventDay.getCalendar().getTime();
-                String str = d.toString();
-                str = str.substring(8, 10);
-                int year = d.getYear() + 1900;
-                int month = d.getMonth() + 1;
-                int dayofmonth = Integer.parseInt(str);
+        calendar_calendar.setOnDayClickListener(eventDay -> {
+            Date d = eventDay.getCalendar().getTime();
+            String str = d.toString();
+            str = str.substring(8, 10);
+            int year = d.getYear() + 1900;
+            int month = d.getMonth() + 1;
+            int dayofmonth = Integer.parseInt(str);
 
-                ArrayList<Shift> shifts = getShifts(year, month, dayofmonth);
-                setShifts(shifts);
-            }
+            ArrayList<Shift> shifts = getShifts(year, month, dayofmonth);
+            setShifts(shifts);
         });
 
         setEvents();
@@ -86,13 +89,19 @@ public class Fragment_Calendar extends Fragment {
 
     private void setEvents(){
         List<EventDay> events = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-
         for(Shift s: userDataManager.getShifts()){
-            calendar.set(s.getStartYear(), s.getStartMonth(), s.getStartDayOfMonth());
+            Calendar calendar = new GregorianCalendar();
+            calendar.set(Calendar.YEAR, s.getStartYear());
+            calendar.set(Calendar.MONTH, s.getStartMonth()-1);
+            calendar.set(Calendar.DAY_OF_MONTH, s.getStartDayOfMonth());
+
             String color = userDataManager.getWorkplace(s.getWorkplaceID()).getColor();
-            events.add(new EventDay(calendar, R.drawable.ic_dot, Color.parseColor(color)));
-            // FIXME: 12/02/2022 - not working here
+            Drawable unwrappedDrawable = AppCompatResources.getDrawable(activity, R.drawable.ic_dot);
+            assert unwrappedDrawable != null;
+            Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+            DrawableCompat.setTint(wrappedDrawable, Color.parseColor(color));
+
+            events.add(new EventDay(calendar, wrappedDrawable));
         }
         calendar_calendar.setEvents(events);
     }
@@ -137,14 +146,11 @@ public class Fragment_Calendar extends Fragment {
                 dialog_confirmation.showDialog(activity,
                         "Delete a Shift",
                         "please confirm that you want to delete this shift: " + shift.toString(),
-                        new ViewDialog_Confirmation.Callback_ViewDialogConfirmation() {
-                            @Override
-                            public void confirmClicked() {
-                                userDataManager.removeShift(shift);
-                                setEvents();
-                                ArrayList<Shift> shifts = getShifts(shift.getStartYear(), shift.getStartMonth(), shift.getStartDayOfMonth());
-                                setShifts(shifts);
-                            }
+                        () -> {
+                            userDataManager.removeShift(shift);
+                            setEvents();
+                            ArrayList<Shift> shifts1 = getShifts(shift.getStartYear(), shift.getStartMonth(), shift.getStartDayOfMonth());
+                            setShifts(shifts1);
                         });
             }
         });

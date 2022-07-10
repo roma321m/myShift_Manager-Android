@@ -69,24 +69,13 @@ public class FirebaseDB {
 
     public void createUser(String uid, User user) {
         if (user != null && uid != null) {
-            users.child(uid).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    // TODO: 10/02/2022 - ?
-                }
-            });
+            users.child(uid).setValue(user);
         }
     }
 
     public void addShift(String uid, Shift shift) {
         if (shift != null && uid != null) {
-            shifts.child(uid).child(shift.getId()).setValue(shift)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            // TODO: 10/02/2022 - ?
-                        }
-                    });
+            shifts.child(uid).child(shift.getId()).setValue(shift);
         }
     }
 
@@ -97,13 +86,7 @@ public class FirebaseDB {
 
     public void addWorkplace(String uid, Workplace workplace) {
         if (workplace != null && uid != null) {
-            workplaces.child(uid).child(workplace.getId()).setValue(workplace)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            // TODO: 10/02/2022 - ?
-                        }
-                    });
+            workplaces.child(uid).child(workplace.getId()).setValue(workplace);
         }
     }
 
@@ -130,6 +113,7 @@ public class FirebaseDB {
                         if (callback_checkUserExistence != null)
                             callback_checkUserExistence.profileExist();
                     } catch (Exception ex) {
+                        Log.d("error", ex.getMessage());
                     }
                 }
             }
@@ -153,6 +137,7 @@ public class FirebaseDB {
                             Shift s1 = child.getValue(Shift.class);
                             shifts.add(s1);
                         } catch (Exception ex) {
+                            Log.d("error", ex.getMessage());
                         }
                     }
                 }
@@ -180,6 +165,7 @@ public class FirebaseDB {
                             Workplace workplace = child.getValue(Workplace.class);
                             workplaces.add(workplace);
                         } catch (Exception ex) {
+                            Log.d("error", ex.getMessage());
                         }
                     }
                 }
@@ -198,37 +184,19 @@ public class FirebaseDB {
 
     public void updateCurrency(String uid, int value) {
         if (uid != null) {
-            users.child(uid).child("currency").setValue(value)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            // TODO: 10/02/2022 - ?
-                        }
-                    });
+            users.child(uid).child("currency").setValue(value);
         }
     }
 
     public void updateTimeFormat(String uid, int value) {
         if (uid != null) {
-            users.child(uid).child("timeFormat").setValue(value)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            // TODO: 10/02/2022 - ?
-                        }
-                    });
+            users.child(uid).child("timeFormat").setValue(value);
         }
     }
 
     public void updateDateFormat(String uid, int value) {
         if (uid != null) {
-            users.child(uid).child("dateFormat").setValue(value)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            // TODO: 10/02/2022 - ?
-                        }
-                    });
+            users.child(uid).child("dateFormat").setValue(value);
         }
     }
 }

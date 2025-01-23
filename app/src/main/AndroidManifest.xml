@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="roman.game.myshiftmanager">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -21,8 +20,7 @@
 
         <activity
             android:name=".Activities.Activity_Splash"
-            android:exported="true"
-            android:screenOrientation="portrait">
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,28 +31,23 @@
 
         <activity
             android:name=".Activities.Activity_Panel"
-            android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:exported="true"/>
 
         <activity
             android:name=".Activities.Activity_MakeProfile"
-            android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:exported="true"/>
 
         <activity
             android:name=".Activities.Activity_Login"
-            android:exported="true"
-            android:screenOrientation="portrait" />
+            android:exported="true"/>
 
         <activity
             android:name=".Activities.Activity_MakeWorkplace"
-            android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:exported="true"/>
 
         <activity
             android:name=".Activities.Activity_MakeShift"
-            android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:exported="true"/>
     </application>
 
 </manifest>

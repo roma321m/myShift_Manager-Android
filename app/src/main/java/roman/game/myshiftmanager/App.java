@@ -7,7 +7,6 @@ import roman.game.myshiftmanager.UserData.MSP;
 import roman.game.myshiftmanager.Managers.BottomMenuManager;
 import roman.game.myshiftmanager.UserData.FirebaseAuthManager;
 import roman.game.myshiftmanager.UserData.UserDataManager;
-import roman.game.myshiftmanager.Managers.VibrationSensorManager;
 
 public class App extends Application {
 
@@ -21,6 +20,5 @@ public class App extends Application {
         UserDataManager.initHelper(this);
         BottomMenuManager.initHelper(this);
         MSP.initHelper(this);
-        VibrationSensorManager.initHelper(this);
     }
 }
